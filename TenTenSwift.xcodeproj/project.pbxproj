@@ -12,6 +12,8 @@
 		4A22D72A195155F500A117EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A22D728195155F500A117EB /* Main.storyboard */; };
 		4A22D72C195155F500A117EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A22D72B195155F500A117EB /* Images.xcassets */; };
 		4A22D738195155F500A117EB /* TenTenSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22D737195155F500A117EB /* TenTenSwiftTests.swift */; };
+		4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F3198F541B003FDBC5 /* BaseViewController.swift */; };
+		4AC611F6198F543C003FDBC5 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		4A22D731195155F500A117EB /* TenTenSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TenTenSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A22D736195155F500A117EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A22D737195155F500A117EB /* TenTenSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenTenSwiftTests.swift; sourceTree = "<group>"; };
+		4AC611F3198F541B003FDBC5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 			children = (
 				4A22D724195155F500A117EB /* AppDelegate.swift */,
 				4A22D726195155F500A117EB /* ViewController.swift */,
+				4AC611F3198F541B003FDBC5 /* BaseViewController.swift */,
+				4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */,
 				4A22D728195155F500A117EB /* Main.storyboard */,
 				4A22D72B195155F500A117EB /* Images.xcassets */,
 				4A22D722195155F500A117EB /* Supporting Files */,
@@ -208,8 +214,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC611F6198F543C003FDBC5 /* BaseNavigationController.swift in Sources */,
 				4A22D727195155F500A117EB /* ViewController.swift in Sources */,
 				4A22D725195155F500A117EB /* AppDelegate.swift in Sources */,
+				4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +405,7 @@
 				4A22D73D195155F500A117EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4A22D73E195155F500A117EB /* Build configuration list for PBXNativeTarget "TenTenSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +414,7 @@
 				4A22D740195155F500A117EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
