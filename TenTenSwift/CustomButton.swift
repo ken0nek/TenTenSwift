@@ -10,7 +10,13 @@ import UIKit
 
 class CustomButton: UIButton {
     
+    var animationButtons: [AnimationButton]
+    
     override init(frame: CGRect) {
+        animationButtons = [AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 0),
+                            AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 1),
+                            AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 2),
+                            AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 3)]
         super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchUpInside)
@@ -29,12 +35,12 @@ class CustomButton: UIButton {
         let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
         let radius: Int = 55
         
-        for i in 0 ..< 4 {
-            let animationButton = AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: i)
+        for animationButton in animationButtons {
             animationButton.center = centerPoint
+            
             self.superview!.addSubview(animationButton)
             
-            let point = CGPoint(x: radius * Int(sinf(Float(M_PI_2) * Float(i))), y: radius * Int(cosf(Float(M_PI_2) * Float(i))))
+            let point = CGPoint(x: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))))
             
             UIView.animateWithDuration(0.8,
                 delay: 0,
@@ -45,8 +51,8 @@ class CustomButton: UIButton {
                     animationButton.center = centerPoint.addPoint(point);
                 }, completion:{
                     (value: Bool) in
-                    // animationButton.removeFromSuperview()
             })
+
         }
     }
     
