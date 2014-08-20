@@ -21,11 +21,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let button = CustomButton(frame: CGRectMake(320/2, 568/2, 60, 60))
-        self.view.addSubview(button)
+        let customView1 = CustomView(frame: CGRectMake(0, 248, 160, 160))
+        self.view.addSubview(customView1)
 
-        let anotherButton = CustomButton(frame: CGRectMake(0, 568/2, 60, 60))
-        self.view.addSubview(anotherButton)
+        let customView2 = CustomView(frame: CGRectMake(160, 248, 160, 160))
+        self.view.addSubview(customView2)
+        
+        let customView3 = CustomView(frame: CGRectMake(0, 408, 160, 160))
+        self.view.addSubview(customView3)
+
+        let customView4 = CustomView(frame: CGRectMake(160, 408, 160, 160))
+        self.view.addSubview(customView4)
     }
 
     override func didReceiveMemoryWarning() {

@@ -12,6 +12,7 @@
 		4A22D72A195155F500A117EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A22D728195155F500A117EB /* Main.storyboard */; };
 		4A22D72C195155F500A117EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A22D72B195155F500A117EB /* Images.xcassets */; };
 		4A22D738195155F500A117EB /* TenTenSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22D737195155F500A117EB /* TenTenSwiftTests.swift */; };
+		4A23037419A4F61900832171 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A23037319A4F61900832171 /* CustomView.swift */; };
 		4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */; };
 		4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F3198F541B003FDBC5 /* BaseViewController.swift */; };
 		4AC611F6198F543C003FDBC5 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */; };
@@ -21,6 +22,7 @@
 		4AC6120019946C99003FDBC5 /* command_icon_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AC611FB19946C99003FDBC5 /* command_icon_2@2x.png */; };
 		4AC6120119946C99003FDBC5 /* command_icon_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AC611FC19946C99003FDBC5 /* command_icon_3@2x.png */; };
 		4AC6120219946C99003FDBC5 /* command_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AC611FD19946C99003FDBC5 /* command_icon@2x.png */; };
+		4AD2845F19A4C556008391DA /* AnimationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2845E19A4C556008391DA /* AnimationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,7 @@
 		4A22D731195155F500A117EB /* TenTenSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TenTenSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A22D736195155F500A117EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A22D737195155F500A117EB /* TenTenSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenTenSwiftTests.swift; sourceTree = "<group>"; };
+		4A23037319A4F61900832171 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		4AC611F3198F541B003FDBC5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 		4AC611FB19946C99003FDBC5 /* command_icon_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "command_icon_2@2x.png"; sourceTree = "<group>"; };
 		4AC611FC19946C99003FDBC5 /* command_icon_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "command_icon_3@2x.png"; sourceTree = "<group>"; };
 		4AC611FD19946C99003FDBC5 /* command_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "command_icon@2x.png"; sourceTree = "<group>"; };
+		4AD2845E19A4C556008391DA /* AnimationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +100,12 @@
 			isa = PBXGroup;
 			children = (
 				4A22D724195155F500A117EB /* AppDelegate.swift */,
-				4A22D726195155F500A117EB /* ViewController.swift */,
 				4AC611F3198F541B003FDBC5 /* BaseViewController.swift */,
 				4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */,
+				4A22D726195155F500A117EB /* ViewController.swift */,
+				4A23037319A4F61900832171 /* CustomView.swift */,
 				4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */,
+				4AD2845E19A4C556008391DA /* AnimationButton.swift */,
 				4A22D728195155F500A117EB /* Main.storyboard */,
 				4AC611F919946C99003FDBC5 /* command_icon_0@2x.png */,
 				4AC611FA19946C99003FDBC5 /* command_icon_1@2x.png */,
@@ -241,8 +247,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AD2845F19A4C556008391DA /* AnimationButton.swift in Sources */,
 				4AC611F6198F543C003FDBC5 /* BaseNavigationController.swift in Sources */,
 				4A22D727195155F500A117EB /* ViewController.swift in Sources */,
+				4A23037419A4F61900832171 /* CustomView.swift in Sources */,
 				4A22D725195155F500A117EB /* AppDelegate.swift in Sources */,
 				4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */,
 				4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */,

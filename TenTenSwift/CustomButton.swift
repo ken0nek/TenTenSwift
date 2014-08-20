@@ -13,41 +13,26 @@ class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
-        self.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
-        
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("dragView:"))
-        self.addGestureRecognizer(panGestureRecognizer)
     }
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func dragView(panGestureRecognizer: UIPanGestureRecognizer) {
-        let movingView = panGestureRecognizer.view
-        
-        let point1 = panGestureRecognizer.view.center
-        let point2 = panGestureRecognizer.translationInView(panGestureRecognizer.view)
-        let targetPoint = point1.addPoint(point2)
-        
-        movingView.center = targetPoint
-        
-        panGestureRecognizer.setTranslation(CGPointMake(0, 0), inView: movingView)
-    }
 
     func didPressButton() {
-        
-        let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        let radius: Int = 60
+        animate()
+    }
+    
+    func animate() {
+        let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
+        let radius: Int = 55
         
         for i in 0 ..< 4 {
-            let animationButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-            animationButton.frame = CGRectMake(0, 0, 40, 40)
-            animationButton.setBackgroundImage(UIImage(named: "command_icon_\(i)"), forState: UIControlState.Normal)
-            animationButton.center = centerPoint;
-            self.addSubview(animationButton)
+            let animationButton = AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: i)
+            animationButton.center = centerPoint
+            self.superview!.addSubview(animationButton)
             
             let point = CGPoint(x: radius * Int(sinf(Float(M_PI_2) * Float(i))), y: radius * Int(cosf(Float(M_PI_2) * Float(i))))
             
@@ -60,10 +45,27 @@ class CustomButton: UIButton {
                     animationButton.center = centerPoint.addPoint(point);
                 }, completion:{
                     (value: Bool) in
-                    animationButton.removeFromSuperview()
+                    // animationButton.removeFromSuperview()
             })
         }
     }
+    
+//    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+//        println("began")
+//    }
+//    
+//    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
+//        println("moved")
+//    }
+//    
+//    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
+//        println("ended")
+//    }
+//    
+//    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+//        println("cancelled")
+//    }
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
