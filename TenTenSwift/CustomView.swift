@@ -34,15 +34,11 @@ class CustomView: UIView {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
     
     func didDrag(panGestureRecognizer: UIPanGestureRecognizer) {
         println("pan : \(panGestureRecognizer.state.hashValue)")
         self.superview!.bringSubviewToFront(self)
-        self.customButton.isActive = false
+        self.customButton.dismiss()
         
         let myCenterPoint = self.center
         let translation = panGestureRecognizer.translationInView(self)
@@ -63,21 +59,29 @@ class CustomView: UIView {
                         let customButton = customView.customButton as CustomButton
                         if customButton.isActive == true {
                             println("Active")
-                            if translation.x > 20 {
-                                println("right")
-                                customButton.execute(0)
-                            } else if translation.x < -20 {
-                                println("left")
-                                customButton.execute(2)
-                            } else if translation.y > 20 {
-                                println("down")
-                                customButton.execute(3)
-                            } else if translation.y < -20 {
-                                println("up")
-                                customButton.execute(1)
+                            
+                            let sensitivity: CGFloat = CGFloat(15)
+                            if translation.x > sensitivity || translation.x < -sensitivity || translation.y > sensitivity || translation.y < -sensitivity {
+                                if translation.x > sensitivity {
+                                    println("right")
+                                    customButton.execute(0)
+                                } else if translation.x < -sensitivity {
+                                    println("left")
+                                    customButton.execute(2)
+                                } else if translation.y > sensitivity {
+                                    println("down")
+                                    customButton.execute(1)
+                                } else if translation.y < -sensitivity {
+                                    println("up")
+                                    customButton.execute(3)
+                                } else {
+                                    println("undefined")
+                                    // customButton.dismiss()
+                                }
+                                panGestureRecognizer.enabled = false
+                                self.removeFromSuperview()
                             } else {
-                                println("undefined")
-                                // customButton.dismiss()
+                                
                             }
                         } else {
                             println("Inactive")

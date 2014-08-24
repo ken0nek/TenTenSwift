@@ -81,16 +81,30 @@ class CustomButton: UIButton {
     }
     
     func execute(type: Int) {
-        UIView.animateWithDuration(0.1, animations: {
-                self.animationButtons[type].transform = CGAffineTransformScale(self.animationButtons[type].transform, 1.5, 1.5)
-                self.animationButtons[type].alpha = 0.2
-            }, completion: {
-                (value: Bool) in
-                for animationButton in self.animationButtons {
-                    animationButton.removeFromSuperview()
-                    animationButton.initialize()
-                }
-        })
+        isActive = false
+        
+        let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
+        
+        for animationButton in animationButtons {
+            if animationButton.type == type {
+                UIView.animateWithDuration(0.8, animations: {
+                    animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                    animationButton.alpha = 0.4
+                    }, completion: {
+                        (value: Bool) in
+                        animationButton.removeFromSuperview()
+                        animationButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                        animationButton.alpha = 1.0
+                })
+            } else {
+                UIView.animateWithDuration(0.8, animations: {
+                    animationButton.center = centerPoint
+                    }, completion: {
+                        (value: Bool) in
+                        animationButton.removeFromSuperview()
+                })
+            }
+        }
     }
     
     /*
