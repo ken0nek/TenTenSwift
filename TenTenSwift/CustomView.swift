@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomView: UIView, UIGestureRecognizerDelegate {
+class CustomView: UIView {
     
     var customButton: CustomButton = CustomButton(frame: CGRectMake(0, 0, 0, 0))
     
@@ -18,16 +18,7 @@ class CustomView: UIView, UIGestureRecognizerDelegate {
         self.backgroundColor = UIColor.brownColor()
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
-        panGestureRecognizer.delegate = self
         self.addGestureRecognizer(panGestureRecognizer)
-        
-        let directions: [UISwipeGestureRecognizerDirection] = [.Right, .Left, .Up, .Down]
-        for direction in directions {
-            let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("didSwipe:"))
-            swipeGestureRecognizer.direction = direction
-            swipeGestureRecognizer.delegate = self
-            self.addGestureRecognizer(swipeGestureRecognizer)
-        }
         
         customButton = CustomButton(point: CGPointMake(0, 0))
         customButton.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
@@ -45,10 +36,6 @@ class CustomView: UIView, UIGestureRecognizerDelegate {
     }
 
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
@@ -76,30 +63,30 @@ class CustomView: UIView, UIGestureRecognizerDelegate {
                         let customButton = customView.customButton as CustomButton
                         if customButton.isActive == true {
                             println("Active")
-                            if translation.x > 10 {
+                            if translation.x > 20 {
                                 println("right")
-                            } else if translation.x < -10 {
+                                customButton.execute(0)
+                            } else if translation.x < -20 {
                                 println("left")
-                            } else if translation.y > 10 {
+                                customButton.execute(2)
+                            } else if translation.y > 20 {
                                 println("down")
-                            } else if translation.y < -10 {
+                                customButton.execute(3)
+                            } else if translation.y < -20 {
                                 println("up")
-                                customButton.animationButtons[3]
+                                customButton.execute(1)
                             } else {
                                 println("undefined")
+                                // customButton.dismiss()
                             }
                         } else {
                             println("Inactive")
-                            customButton.animate()
+                            customButton.expand()
                         }
                     }
                 }
             }
         }
-    }
-    
-    func didSwipe(swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        println("swipe : \(swipeGestureRecognizer.state.hashValue)")
     }
 
     /*

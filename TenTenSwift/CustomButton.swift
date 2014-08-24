@@ -38,7 +38,7 @@ class CustomButton: UIButton {
         dismiss()
     }
     
-    func animate() {
+    func expand() {
         isActive = true
         
         let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
@@ -49,7 +49,7 @@ class CustomButton: UIButton {
             
             self.superview!.addSubview(animationButton)
             
-            let point = CGPoint(x: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))))
+            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))))
             
             UIView.animateWithDuration(0.4,
                 delay: 0,
@@ -78,6 +78,19 @@ class CustomButton: UIButton {
                     animationButton.removeFromSuperview()
             })
         }
+    }
+    
+    func execute(type: Int) {
+        UIView.animateWithDuration(0.1, animations: {
+                self.animationButtons[type].transform = CGAffineTransformScale(self.animationButtons[type].transform, 1.5, 1.5)
+                self.animationButtons[type].alpha = 0.2
+            }, completion: {
+                (value: Bool) in
+                for animationButton in self.animationButtons {
+                    animationButton.removeFromSuperview()
+                    animationButton.initialize()
+                }
+        })
     }
     
     /*
