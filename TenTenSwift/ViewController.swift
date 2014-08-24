@@ -21,16 +21,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let customView1 = CustomView(frame: CGRectMake(0, 220, 160, 160))
+        let width = CGFloat(60)
+        let height = CGFloat(60)
+
+        let customView1 = CustomView(point: CGPointMake(0, 220))
         self.view.addSubview(customView1)
 
-        let customView2 = CustomView(frame: CGRectMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y, 160, 160))
+        let customView2 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y))
         self.view.addSubview(customView2)
         
-        let customView3 = CustomView(frame: CGRectMake(customView1.frame.origin.x, customView1.frame.origin.y + customView1.frame.size.height, 160, 160))
+        let customView3 = CustomView(point: CGPointMake(customView1.frame.origin.x, customView1.frame.origin.y + customView1.frame.size.height))
         self.view.addSubview(customView3)
 
-        let customView4 = CustomView(frame: CGRectMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y + customView1.frame.size.height, 160, 160))
+        let customView4 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y + customView1.frame.size.height))
         self.view.addSubview(customView4)
     }
 

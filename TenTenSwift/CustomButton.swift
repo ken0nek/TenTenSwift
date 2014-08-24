@@ -10,13 +10,13 @@ import UIKit
 
 class CustomButton: UIButton {
     
-    var animationButtons: [AnimationButton]
+    var animationButtons: [AnimationButton] =
+    [AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 0),
+        AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 1),
+        AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 2),
+        AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 3)]
     
     override init(frame: CGRect) {
-        animationButtons = [AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 0),
-                            AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 1),
-                            AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 2),
-                            AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 3)]
         super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchUpInside)
@@ -28,7 +28,7 @@ class CustomButton: UIButton {
     }
 
     func didPressButton() {
-        animate()
+        dismiss()
     }
     
     func animate() {
@@ -42,35 +42,32 @@ class CustomButton: UIButton {
             
             let point = CGPoint(x: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))))
             
-            UIView.animateWithDuration(0.8,
+            UIView.animateWithDuration(0.4,
                 delay: 0,
-                usingSpringWithDamping: 0.4,
+                usingSpringWithDamping: 0.6,
                 initialSpringVelocity: 0,
                 options: UIViewAnimationOptions.CurveLinear,
-                animations:{
+                animations: {
                     animationButton.center = centerPoint.addPoint(point);
-                }, completion:{
+                }, completion: {
                     (value: Bool) in
             })
-
         }
     }
     
-//    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
-//        println("began")
-//    }
-//    
-//    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
-//        println("moved")
-//    }
-//    
-//    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
-//        println("ended")
-//    }
-//    
-//    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-//        println("cancelled")
-//    }
+    func dismiss() {
+        let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
+        
+        for animationButton in animationButtons {
+            
+            UIView.animateWithDuration(0.1, animations: {
+                    animationButton.center = centerPoint
+                }, completion: {
+                    (value: Bool) in
+                    animationButton.removeFromSuperview()
+            })
+        }
+    }
     
     /*
     // Only override drawRect: if you perform custom drawing.

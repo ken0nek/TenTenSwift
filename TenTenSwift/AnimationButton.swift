@@ -10,11 +10,11 @@ import UIKit
 
 class AnimationButton: UIButton {
     
-    var type: Int;
+    var type: Int = 0
 
     init(frame: CGRect, type: Int) {
-        self.type = type
         super.init(frame: frame)
+        self.type = type
         self.setBackgroundImage(UIImage(named: "command_icon_\(type)"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressAnimationButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
