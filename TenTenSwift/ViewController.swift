@@ -24,27 +24,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         display()
-
-        let fraction1 = Fraction()
-        fraction1.description()
-
-        let fraction2 = Fraction(numerator: 5)
-        fraction2.description()
-
-        let fraction3 = Fraction(numerator: 4, denominator: 3)
-        fraction3.description()
-
-        let fraction4 = Fraction(numerator: 8, denominator: 4)
-        fraction4.description()
-
-        let fraction5 = Fraction(numerator: -4, denominator: 3)
-        fraction5.description()
-
-        let fraction6 = Fraction(numerator: -4, denominator: -2)
-        fraction6.description()
-
-        let fraction7 = Fraction(numerator: 4, denominator: -3)
-        fraction7.description()
     }
 
     func display() {

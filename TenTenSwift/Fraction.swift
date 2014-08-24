@@ -69,6 +69,19 @@ class Fraction: NSObject {
         }
     }
     
+    func inverse() -> Fraction {
+        var newNumerator = numerator
+        var newDenominator = denominator
+        
+        if newNumerator == 0 {
+            return Fraction(numerator: 0)
+        } else if newNumerator > 0 {
+            return Fraction(numerator: newDenominator, denominator: newNumerator)
+        } else {
+            return Fraction(numerator: -newDenominator, denominator: -newNumerator)
+        }
+    }
+    
     func addFraction(fraction: Fraction) -> Fraction {
         let newNumerator = numerator * fraction.denominator + denominator * fraction.numerator
         let newDenominator = denominator * fraction.denominator
@@ -76,14 +89,18 @@ class Fraction: NSObject {
     }
     
     func subtractFraction(fraction: Fraction) -> Fraction {
-        return Fraction()
+        let newFraction = Fraction(numerator: -fraction.numerator, denominator: fraction.denominator)
+        return self.addFraction(newFraction)
     }
     
     func mulplicateFraction(fraction: Fraction) -> Fraction {
-        return Fraction()
+        let newNumerator = numerator * fraction.numerator
+        let newDenominator = denominator * fraction.denominator
+        return Fraction(numerator: newNumerator, denominator: newDenominator)
     }
     
     func divideFraction(fraction: Fraction) -> Fraction {
-        return Fraction()
+        let newFraction = fraction.inverse()
+        return self.mulplicateFraction(newFraction)
     }
 }
