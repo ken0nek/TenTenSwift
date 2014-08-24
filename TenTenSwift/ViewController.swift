@@ -16,14 +16,14 @@ extension CGPoint {
 }
 
 class ViewController: UIViewController {
+
+    @IBOutlet weak var directionLabel: UILabel!
+    @IBOutlet weak var translationLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let width = CGFloat(60)
-        let height = CGFloat(60)
-
         let customView1 = CustomView(point: CGPointMake(0, 220))
         self.view.addSubview(customView1)
 

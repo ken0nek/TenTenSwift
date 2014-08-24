@@ -43,6 +43,9 @@ class CustomView: UIView {
         let myCenterPoint = self.center
         let translation = panGestureRecognizer.translationInView(self)
         println("translation : \(translation)")
+        
+        updateTranslationLabel(translation)
+        
 //        let location = panGestureRecognizer.locationInView(self)
 //        println("location : \(location)")
         let targetPoint = myCenterPoint.addPoint(translation)
@@ -59,27 +62,33 @@ class CustomView: UIView {
                         let customButton = customView.customButton as CustomButton
                         if customButton.isActive == true {
                             println("Active")
-                            
                             let sensitivity: CGFloat = CGFloat(15)
+                            var direction = ""
                             if translation.x > sensitivity || translation.x < -sensitivity || translation.y > sensitivity || translation.y < -sensitivity {
                                 if translation.x > sensitivity {
                                     println("right")
+                                    direction = "right"
                                     customButton.execute(0)
                                 } else if translation.x < -sensitivity {
                                     println("left")
+                                    direction = "left"
                                     customButton.execute(2)
                                 } else if translation.y > sensitivity {
                                     println("down")
+                                    direction = "down"
                                     customButton.execute(1)
                                 } else if translation.y < -sensitivity {
                                     println("up")
+                                    direction = "up"
                                     customButton.execute(3)
                                 } else {
                                     println("undefined")
+                                    direction = "undefined"
                                     // customButton.dismiss()
                                 }
-                                panGestureRecognizer.enabled = false
-                                self.removeFromSuperview()
+                                updateDirectionLabel(direction)
+                                // panGestureRecognizer.enabled = false
+                                // self.removeFromSuperview()
                             } else {
                                 
                             }
@@ -91,6 +100,16 @@ class CustomView: UIView {
                 }
             }
         }
+    }
+    
+    func updateDirectionLabel(direction: String) {
+        let directionLabel = self.superview!.viewWithTag(1) as UILabel
+        directionLabel.text = "direction : \(direction)"
+    }
+    
+    func updateTranslationLabel(translation: CGPoint) {
+        let translationLabel = self.superview!.viewWithTag(2) as UILabel
+        translationLabel.text = "translation : \(translation)"
     }
 
     /*
