@@ -19,6 +19,12 @@ class AnimationButton: UIButton {
         self.addTarget(self, action: Selector("didPressAnimationButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
     }
+    
+    convenience init(point: CGPoint, type: Int) {
+        let width: CGFloat = CGFloat(40)
+        let height: CGFloat = CGFloat(40)
+        self.init(frame: CGRectMake(point.x, point.y, width, height), type: type)
+    }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

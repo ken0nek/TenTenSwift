@@ -11,16 +11,23 @@ import UIKit
 class CustomButton: UIButton {
     
     var animationButtons: [AnimationButton] =
-    [AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 0),
-        AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 1),
-        AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 2),
-        AnimationButton(frame: CGRectMake(0, 0, 40, 40), type: 3)]
+    [AnimationButton(point: CGPointMake(0, 0), type: 0),
+        AnimationButton(point: CGPointMake(0, 0), type: 1),
+        AnimationButton(point: CGPointMake(0, 0), type: 2),
+        AnimationButton(point: CGPointMake(0, 0), type: 3)]
+    var isActive: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
+    }
+    
+    convenience init(point: CGPoint) {
+        let width: CGFloat = CGFloat(60)
+        let height: CGFloat = CGFloat(60)
+        self.init(frame: CGRectMake(point.x, point.y, width, height))
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -32,6 +39,8 @@ class CustomButton: UIButton {
     }
     
     func animate() {
+        isActive = true
+        
         let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
         let radius: Int = 55
         
@@ -56,6 +65,8 @@ class CustomButton: UIButton {
     }
     
     func dismiss() {
+        isActive = false
+        
         let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
         
         for animationButton in animationButtons {
