@@ -15,7 +15,7 @@ class CustomView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.userInteractionEnabled = true
-        self.backgroundColor = UIColor.brownColor()
+        // self.backgroundColor = UIColor.brownColor()
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)
@@ -36,13 +36,14 @@ class CustomView: UIView {
     }
     
     func didDrag(panGestureRecognizer: UIPanGestureRecognizer) {
-        println("pan : \(panGestureRecognizer.state.hashValue)")
+        // println("pan : \(panGestureRecognizer.state.hashValue)")
         self.superview!.bringSubviewToFront(self)
-        self.customButton.dismiss()
+        self.bringSubviewToFront(customButton)
+        customButton.dismiss()
         
         let myCenterPoint = self.center
         let translation = panGestureRecognizer.translationInView(self)
-        println("translation : \(translation)")
+        // println("translation : \(translation)")
         
         updateTranslationLabel(translation)
         
@@ -58,7 +59,7 @@ class CustomView: UIView {
             if let customView = someView as? CustomView {
                 if CGRectIntersectsRect(customView.frame, self.frame) {
                     if !customView.isEqual(self) {
-                        let customButton = customView.customButton as CustomButton
+                        let customButton = customView.customButton
                         if customButton.isActive == true {
                             println("Active")
                             let sensitivity = CGFloat(15)
@@ -83,7 +84,7 @@ class CustomView: UIView {
                                 } else {
                                     println("undefined")
                                     direction = "undefined"
-                                    // customButton.dismiss()
+                                    customButton.dismiss()
                                 }
                                 updateDirectionLabel(direction)
                                 panGestureRecognizer.enabled = false

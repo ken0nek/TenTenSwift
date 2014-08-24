@@ -33,7 +33,7 @@ class CustomButton: UIButton {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func didPressButton() {
         dismiss()
     }
@@ -46,9 +46,8 @@ class CustomButton: UIButton {
         
         for animationButton in animationButtons {
             animationButton.center = centerPoint
-            
             self.superview!.addSubview(animationButton)
-            
+                        
             let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))))
             
             UIView.animateWithDuration(0.4,
@@ -87,7 +86,7 @@ class CustomButton: UIButton {
         
         for animationButton in animationButtons {
             if animationButton.type == type {
-                UIView.animateWithDuration(0.8, animations: {
+                UIView.animateWithDuration(0.6, animations: {
                     animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                     animationButton.alpha = 0.4
                     }, completion: {
@@ -97,7 +96,7 @@ class CustomButton: UIButton {
                         animationButton.alpha = 1.0
                 })
             } else {
-                UIView.animateWithDuration(0.8, animations: {
+                UIView.animateWithDuration(0.6, animations: {
                     animationButton.center = centerPoint
                     }, completion: {
                         (value: Bool) in

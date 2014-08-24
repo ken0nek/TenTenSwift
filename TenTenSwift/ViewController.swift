@@ -23,8 +23,28 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        display()
 
-display()
+        let fraction1 = Fraction()
+        fraction1.description()
+
+        let fraction2 = Fraction(numerator: 5)
+        fraction2.description()
+
+        let fraction3 = Fraction(numerator: 4, denominator: 3)
+        fraction3.description()
+
+        let fraction4 = Fraction(numerator: 8, denominator: 4)
+        fraction4.description()
+
+        let fraction5 = Fraction(numerator: -4, denominator: 3)
+        fraction5.description()
+
+        let fraction6 = Fraction(numerator: -4, denominator: -2)
+        fraction6.description()
+
+        let fraction7 = Fraction(numerator: 4, denominator: -3)
+        fraction7.description()
     }
 
     func display() {
@@ -40,8 +60,7 @@ display()
 
         let customView4 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y + customView1.frame.size.height))
         self.view.addSubview(customView4)
-
-}
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -53,8 +72,9 @@ display()
             if let customView = someView as? CustomView {
                 customView.removeFromSuperview()
             }
-    }
-    display()
+        }
+
+        display()
     }
 }
 

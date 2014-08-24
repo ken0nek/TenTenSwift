@@ -14,6 +14,7 @@
 		4A22D738195155F500A117EB /* TenTenSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22D737195155F500A117EB /* TenTenSwiftTests.swift */; };
 		4A23037419A4F61900832171 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A23037319A4F61900832171 /* CustomView.swift */; };
 		4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */; };
+		4A61D1C319AA26C40091618D /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61D1C219AA26C40091618D /* Fraction.swift */; };
 		4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F3198F541B003FDBC5 /* BaseViewController.swift */; };
 		4AC611F6198F543C003FDBC5 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */; };
 		4AC611F8198F57A4003FDBC5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC611F7198F57A4003FDBC5 /* QuartzCore.framework */; };
@@ -47,6 +48,7 @@
 		4A22D737195155F500A117EB /* TenTenSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenTenSwiftTests.swift; sourceTree = "<group>"; };
 		4A23037319A4F61900832171 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		4A61D1C219AA26C40091618D /* Fraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
 		4AC611F3198F541B003FDBC5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		4AC611F7198F57A4003FDBC5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -106,6 +108,7 @@
 				4A23037319A4F61900832171 /* CustomView.swift */,
 				4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */,
 				4AD2845E19A4C556008391DA /* AnimationButton.swift */,
+				4A61D1C219AA26C40091618D /* Fraction.swift */,
 				4A22D728195155F500A117EB /* Main.storyboard */,
 				4AC611F919946C99003FDBC5 /* command_icon_0@2x.png */,
 				4AC611FA19946C99003FDBC5 /* command_icon_1@2x.png */,
@@ -254,6 +257,7 @@
 				4A22D725195155F500A117EB /* AppDelegate.swift in Sources */,
 				4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */,
 				4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */,
+				4A61D1C319AA26C40091618D /* Fraction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
