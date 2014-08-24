@@ -61,12 +61,27 @@ class Fraction: NSObject {
         return numerator
     }
     
+    func descriptionString() -> String {
+        return "\(numerator) / \(denominator)"
+    }
+    
     func description() {
         if isFraction {
-            println("\(numerator) / \(denominator), isFraction : \(isFraction.boolValue)")
+            println("\(descriptionString()), isFraction : \(isFraction.boolValue)")
         } else {
-            println("\(numerator) / \(denominator), isFraction : \(isFraction.boolValue), intValue : \(intValue())")
+            println("\(descriptionString()), isFraction : \(isFraction.boolValue), intValue : \(intValue())")
         }
+    }
+    
+    func descriptionOfCalculation(fraction: Fraction, type: OperatorType, newFraction: Fraction) {
+        var operatorString = ""
+        switch type {
+        case .Add: operatorString = "+"
+        case .Subtract: operatorString = "−"
+        case .Multiply: operatorString = "*"
+        case .Divide: operatorString = "/"
+        }
+        println("\(descriptionString()) \(operatorString) \(fraction.descriptionString()) = \(newFraction.descriptionString())")
     }
     
     func inverse() -> Fraction {
@@ -82,6 +97,19 @@ class Fraction: NSObject {
         }
     }
     
+    func calculate(fraction: Fraction, type: OperatorType) -> Fraction {
+        var newFraction = Fraction()
+        switch type {
+        case .Add: newFraction = addFraction(fraction)
+        case .Divide: newFraction = divideFraction(fraction)
+        case .Subtract: newFraction = subtractFraction(fraction)
+        case .Multiply: newFraction = multiplyFraction(fraction)
+        }
+        
+        descriptionOfCalculation(fraction, type: type, newFraction: newFraction)
+        return newFraction
+    }
+    
     func addFraction(fraction: Fraction) -> Fraction {
         let newNumerator = numerator * fraction.denominator + denominator * fraction.numerator
         let newDenominator = denominator * fraction.denominator
@@ -90,10 +118,10 @@ class Fraction: NSObject {
     
     func subtractFraction(fraction: Fraction) -> Fraction {
         let newFraction = Fraction(numerator: -fraction.numerator, denominator: fraction.denominator)
-        return self.addFraction(newFraction)
+        return addFraction(newFraction)
     }
     
-    func mulplicateFraction(fraction: Fraction) -> Fraction {
+    func multiplyFraction(fraction: Fraction) -> Fraction {
         let newNumerator = numerator * fraction.numerator
         let newDenominator = denominator * fraction.denominator
         return Fraction(numerator: newNumerator, denominator: newDenominator)
@@ -101,6 +129,6 @@ class Fraction: NSObject {
     
     func divideFraction(fraction: Fraction) -> Fraction {
         let newFraction = fraction.inverse()
-        return self.mulplicateFraction(newFraction)
+        return multiplyFraction(newFraction)
     }
 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum OperatorType: Int {
+    case Add = 0, Subtract = 2, Multiply = 3, Divide = 1
+}
+
 class AnimationButton: UIButton {
     
     var type: Int

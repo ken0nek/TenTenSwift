@@ -64,29 +64,36 @@ class CustomView: UIView {
                             println("Active")
                             let sensitivity = CGFloat(15)
                             var direction = ""
+                            var type = OperatorType.Add
                             if translation.x > sensitivity || translation.x < -sensitivity || translation.y > sensitivity || translation.y < -sensitivity {
                                 if translation.x > sensitivity {
                                     println("right")
                                     direction = "right"
-                                    customButton.execute(0)
+                                    type = OperatorType.Add
                                 } else if translation.x < -sensitivity {
                                     println("left")
                                     direction = "left"
-                                    customButton.execute(2)
+                                    type = OperatorType.Subtract
                                 } else if translation.y > sensitivity {
                                     println("down")
                                     direction = "down"
-                                    customButton.execute(1)
+                                    type = OperatorType.Divide
                                 } else if translation.y < -sensitivity {
                                     println("up")
                                     direction = "up"
-                                    customButton.execute(3)
+                                    type = OperatorType.Multiply
                                 } else {
                                     println("undefined")
                                     direction = "undefined"
                                     customButton.dismiss()
                                 }
                                 updateDirectionLabel(direction)
+                                customButton.execute(type)
+                                
+                                let fraction1 = Fraction(numerator: 5, denominator: 3)
+                                let fraction2 = Fraction(numerator: 3, denominator: 4)
+                                fraction1.calculate(fraction2, type: type)
+                                
                                 panGestureRecognizer.enabled = false
                                 self.removeFromSuperview()
                             } else {

@@ -10,11 +10,16 @@ import UIKit
 
 class CustomButton: UIButton {
     
+//    var animationButtons: [AnimationButton] =
+//    [AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Add),
+//        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Divide),
+//        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Subtract),
+//        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Multiply)]
     var animationButtons: [AnimationButton] =
-    [AnimationButton(point: CGPointMake(0, 0), type: 0),
-        AnimationButton(point: CGPointMake(0, 0), type: 1),
-        AnimationButton(point: CGPointMake(0, 0), type: 2),
-        AnimationButton(point: CGPointMake(0, 0), type: 3)]
+    [AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Add.toRaw()),
+        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Divide.toRaw()),
+        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Subtract.toRaw()),
+        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Multiply.toRaw())]
     var isActive: Bool = false
     
     override init(frame: CGRect) {
@@ -47,7 +52,7 @@ class CustomButton: UIButton {
         for animationButton in animationButtons {
             animationButton.center = centerPoint
             self.superview!.addSubview(animationButton)
-                        
+            
             let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))))
             
             UIView.animateWithDuration(0.4,
@@ -79,13 +84,13 @@ class CustomButton: UIButton {
         }
     }
     
-    func execute(type: Int) {
+    func execute(type: OperatorType) {
         isActive = false
         
         let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
         
         for animationButton in animationButtons {
-            if animationButton.type == type {
+            if animationButton.type == type.toRaw() {
                 UIView.animateWithDuration(0.6, animations: {
                     animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                     animationButton.alpha = 0.4
