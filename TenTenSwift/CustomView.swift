@@ -26,8 +26,8 @@ class CustomView: UIView {
     }
     
     convenience init(point: CGPoint) {
-        let width: CGFloat = CGFloat(60)
-        let height: CGFloat = CGFloat(60)
+        let width = CGFloat(60)
+        let height = CGFloat(60)
         self.init(frame: CGRectMake(point.x, point.y, width, height))
     }
 
@@ -55,14 +55,13 @@ class CustomView: UIView {
         panGestureRecognizer.setTranslation(CGPointMake(0, 0), inView: self)
         
         for someView in self.superview!.subviews {
-            if someView.isKindOfClass(CustomView) {
-                let customView = someView as CustomView
+            if let customView = someView as? CustomView {
                 if CGRectIntersectsRect(customView.frame, self.frame) {
                     if !customView.isEqual(self) {
                         let customButton = customView.customButton as CustomButton
                         if customButton.isActive == true {
                             println("Active")
-                            let sensitivity: CGFloat = CGFloat(15)
+                            let sensitivity = CGFloat(15)
                             var direction = ""
                             if translation.x > sensitivity || translation.x < -sensitivity || translation.y > sensitivity || translation.y < -sensitivity {
                                 if translation.x > sensitivity {
@@ -87,8 +86,8 @@ class CustomView: UIView {
                                     // customButton.dismiss()
                                 }
                                 updateDirectionLabel(direction)
-                                // panGestureRecognizer.enabled = false
-                                // self.removeFromSuperview()
+                                panGestureRecognizer.enabled = false
+                                self.removeFromSuperview()
                             } else {
                                 
                             }

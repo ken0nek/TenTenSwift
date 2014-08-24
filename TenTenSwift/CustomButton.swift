@@ -25,8 +25,8 @@ class CustomButton: UIButton {
     }
     
     convenience init(point: CGPoint) {
-        let width: CGFloat = CGFloat(60)
-        let height: CGFloat = CGFloat(60)
+        let width = CGFloat(60)
+        let height = CGFloat(60)
         self.init(frame: CGRectMake(point.x, point.y, width, height))
     }
     

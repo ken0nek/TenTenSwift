@@ -10,19 +10,19 @@ import UIKit
 
 class AnimationButton: UIButton {
     
-    var type: Int = 0
+    var type: Int
 
     init(frame: CGRect, type: Int) {
-        super.init(frame: frame)
         self.type = type
+        super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon_\(type)"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressAnimationButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
     }
     
     convenience init(point: CGPoint, type: Int) {
-        let width: CGFloat = CGFloat(40)
-        let height: CGFloat = CGFloat(40)
+        let width = CGFloat(40)
+        let height = CGFloat(40)
         self.init(frame: CGRectMake(point.x, point.y, width, height), type: type)
     }
 

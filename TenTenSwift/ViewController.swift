@@ -23,6 +23,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+display()
+    }
+
+    func display() {
         
         let customView1 = CustomView(point: CGPointMake(0, 220))
         self.view.addSubview(customView1)
@@ -35,11 +40,21 @@ class ViewController: UIViewController {
 
         let customView4 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y + customView1.frame.size.height))
         self.view.addSubview(customView4)
-    }
+
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func reset() {
+        for someView in self.view.subviews {
+            if let customView = someView as? CustomView {
+                customView.removeFromSuperview()
+            }
+    }
+    display()
     }
 }
 
