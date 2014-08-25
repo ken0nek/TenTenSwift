@@ -39,7 +39,6 @@ class CustomView: UIView {
         // println("pan : \(panGestureRecognizer.state.hashValue)")
         self.superview!.bringSubviewToFront(self)
         self.bringSubviewToFront(customButton)
-        customButton.dismiss()
         
         let myCenterPoint = self.center
         let translation = panGestureRecognizer.translationInView(self)
@@ -57,8 +56,9 @@ class CustomView: UIView {
         
         for someView in self.superview!.subviews {
             if let customView = someView as? CustomView {
-                if CGRectIntersectsRect(customView.frame, self.frame) {
-                    if !customView.isEqual(self) {
+                if !customView.isEqual(self) {
+                    if CGRectIntersectsRect(customView.frame, self.frame) {
+                        
                         let customButton = customView.customButton
                         if customButton.isActive == true {
                             println("Active")
@@ -96,13 +96,15 @@ class CustomView: UIView {
                                 
                                 panGestureRecognizer.enabled = false
                                 self.removeFromSuperview()
-                            } else {
+                            } else { // Intersect but no action
                                 
                             }
                         } else {
                             println("Inactive")
                             customButton.expand()
                         }
+                    } else {
+                        customView.customButton.dismiss()
                     }
                 }
             }

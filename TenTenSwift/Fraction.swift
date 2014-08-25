@@ -10,11 +10,15 @@ import UIKit
 
 class Fraction: NSObject {
     var numerator: Int
-    var denominator: Int
+    var denominator: Int // Int?
     var isFraction: Bool {
         get {
             return denominator != 1
         }
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override init() {
@@ -61,15 +65,15 @@ class Fraction: NSObject {
         return numerator
     }
     
-    func descriptionString() -> String {
+    func fractionString() -> String {
         return "\(numerator) / \(denominator)"
     }
     
     func description() {
         if isFraction {
-            println("\(descriptionString()), isFraction : \(isFraction.boolValue)")
+            println("\(fractionString()), isFraction : \(isFraction.boolValue)")
         } else {
-            println("\(descriptionString()), isFraction : \(isFraction.boolValue), intValue : \(intValue())")
+            println("\(fractionString()), isFraction : \(isFraction.boolValue), intValue : \(intValue())")
         }
     }
     
@@ -81,7 +85,7 @@ class Fraction: NSObject {
         case .Multiply: operatorString = "*"
         case .Divide: operatorString = "/"
         }
-        println("\(descriptionString()) \(operatorString) \(fraction.descriptionString()) = \(newFraction.descriptionString())")
+        println("\(fractionString()) \(operatorString) \(fraction.fractionString()) = \(newFraction.fractionString())")
     }
     
     func inverse() -> Fraction {
