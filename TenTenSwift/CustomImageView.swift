@@ -10,21 +10,122 @@ import UIKit
 
 class CustomImageView: UIImageView {
 
+    let number: Fraction
+    var animationButtons: [AnimationButton] =
+    [AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Add.toRaw()),
+        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Divide.toRaw()),
+        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Subtract.toRaw()),
+        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Multiply.toRaw())]
+    var isActive: Bool = false
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var numeratorLabel: UILabel
-    var denominatorLabel: UILabel?
-    var number: Fraction
+    init(frame: CGRect, number: Fraction) {
+        self.number = number
+        super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.cyanColor()
+        
+        if number.isFraction {
+            let width = CGFloat(30)
+            let height = CGFloat(30)
+            
+            let numeratorLabel = CustomLabel(frame: CGRectMake(0, 0, width, height))
+            let denominatorLabel = CustomLabel(frame: CGRectMake(numeratorLabel.frame.origin.x, numeratorLabel.frame.size.height, width, height))
+            
+            numeratorLabel.text = "\(number.numerator)"
+            denominatorLabel.text = "\(number.denominator)"
+            
+            self.addSubview(numeratorLabel)
+            self.addSubview(denominatorLabel)
+        } else {
+            let width = CGFloat(60)
+            let height = CGFloat(60)
+            
+            let numeratorLabel = CustomLabel(frame: CGRectMake(0, 0, width, height))
+            
+            numeratorLabel.text = "\(number.numerator)"
+            
+            self.addSubview(numeratorLabel)
+        }
+    }
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//    }
+    convenience init(point: CGPoint, number: Fraction) {
+        let width = CGFloat(60)
+        let height = CGFloat(60)
+        self.init(frame: CGRectMake(point.x, point.y, width, height), number: number)
+    }
     
-//    convenience init(point: CGPoint, number: Fraction) {
-//        
-//    }
+    func expand() {
+        isActive = true
+        
+        let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
+        let radius: Int = 55
+        
+        for animationButton in animationButtons {
+            animationButton.center = centerPoint
+            self.superview!.addSubview(animationButton)
+            
+            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))))
+            
+            UIView.animateWithDuration(0.4,
+                delay: 0,
+                usingSpringWithDamping: 0.6,
+                initialSpringVelocity: 0,
+                options: UIViewAnimationOptions.CurveLinear,
+                animations: {
+                    animationButton.center = centerPoint.addPoint(point);
+                }, completion: {
+                    (value: Bool) in
+            })
+        }
+    }
+    
+    func dismiss() {
+        isActive = false
+        
+        let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
+        
+        for animationButton in animationButtons {
+            
+            UIView.animateWithDuration(0.1, animations: {
+                animationButton.center = centerPoint
+                }, completion: {
+                    (value: Bool) in
+                    animationButton.removeFromSuperview()
+            })
+        }
+    }
+    
+    func execute(type: OperatorType) {
+        isActive = false
+        
+        let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
+        
+        for animationButton in animationButtons {
+            if animationButton.type == type.toRaw() {
+                UIView.animateWithDuration(0.6, animations: {
+                    animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                    animationButton.alpha = 0.4
+                    }, completion: {
+                        (value: Bool) in
+                        animationButton.removeFromSuperview()
+                        animationButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                        animationButton.alpha = 1.0
+                })
+            } else {
+                UIView.animateWithDuration(0.1, animations: {
+                    animationButton.center = centerPoint
+                    }, completion: {
+                        (value: Bool) in
+                        animationButton.removeFromSuperview()
+                })
+            }
+        }
+    }
+
     
     /*
     // Only override drawRect: if you perform custom drawing.

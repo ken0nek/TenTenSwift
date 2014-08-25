@@ -24,6 +24,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         display()
+
+        let fraction1 = Fraction(numerator: 5, denominator: 4)
+        let imv = CustomImageView(point: CGPointMake(0, 0), number: fraction1)
+        self.view.addSubview(imv)
     }
 
     func display() {

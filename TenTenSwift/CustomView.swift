@@ -10,19 +10,21 @@ import UIKit
 
 class CustomView: UIView {
     
-    var customButton: CustomButton = CustomButton(frame: CGRectMake(0, 0, 0, 0))
+    // var customButton: CustomButton = CustomButton(point: CGPointMake(0, 0))
+    var customImageView: CustomImageView = CustomImageView(point: CGPointMake(0, 0), number: Fraction())
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.userInteractionEnabled = true
-        // self.backgroundColor = UIColor.brownColor()
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)
         
-        customButton = CustomButton(point: CGPointMake(0, 0))
-        customButton.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        self.addSubview(customButton)
+//        customButton.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
+//        self.addSubview(customButton)
+        
+        customImageView.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
+        self.addSubview(customImageView)
     }
     
     convenience init(point: CGPoint) {
@@ -36,18 +38,16 @@ class CustomView: UIView {
     }
     
     func didDrag(panGestureRecognizer: UIPanGestureRecognizer) {
-        // println("pan : \(panGestureRecognizer.state.hashValue)")
         self.superview!.bringSubviewToFront(self)
-        self.bringSubviewToFront(customButton)
+        // self.bringSubviewToFront(customButton)
+        self.bringSubviewToFront(customImageView)
         
         let myCenterPoint = self.center
         let translation = panGestureRecognizer.translationInView(self)
         // println("translation : \(translation)")
         
         updateTranslationLabel(translation)
-        
-//        let location = panGestureRecognizer.locationInView(self)
-//        println("location : \(location)")
+
         let targetPoint = myCenterPoint.addPoint(translation)
         
         self.center = targetPoint
@@ -59,8 +59,9 @@ class CustomView: UIView {
                 if !customView.isEqual(self) {
                     if CGRectIntersectsRect(customView.frame, self.frame) {
                         
-                        let customButton = customView.customButton
-                        if customButton.isActive == true {
+                        // let customButton = customView.customButton
+                        let customImageView = customView.customImageView
+                        if customImageView.isActive == true {
                             println("Active")
                             let sensitivity = CGFloat(15)
                             var direction = ""
@@ -85,10 +86,10 @@ class CustomView: UIView {
                                 } else {
                                     println("undefined")
                                     direction = "undefined"
-                                    customButton.dismiss()
+                                    customImageView.dismiss()
                                 }
                                 updateDirectionLabel(direction)
-                                customButton.execute(type)
+                                customImageView.execute(type)
                                 
                                 let fraction1 = Fraction(numerator: 5, denominator: 3)
                                 let fraction2 = Fraction(numerator: 3, denominator: 4)
@@ -101,10 +102,10 @@ class CustomView: UIView {
                             }
                         } else {
                             println("Inactive")
-                            customButton.expand()
+                            customImageView.expand()
                         }
                     } else {
-                        customView.customButton.dismiss()
+                        customView.customImageView.dismiss()
                     }
                 }
             }

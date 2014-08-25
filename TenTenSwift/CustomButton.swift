@@ -10,11 +10,6 @@ import UIKit
 
 class CustomButton: UIButton {
     
-//    var animationButtons: [AnimationButton] =
-//    [AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Add),
-//        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Divide),
-//        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Subtract),
-//        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Multiply)]
     var animationButtons: [AnimationButton] =
     [AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Add.toRaw()),
         AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Divide.toRaw()),
@@ -25,7 +20,6 @@ class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
-        self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
     }
     
@@ -37,10 +31,6 @@ class CustomButton: UIButton {
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func didPressButton() {
-        dismiss()
     }
     
     func expand() {
@@ -101,7 +91,7 @@ class CustomButton: UIButton {
                         animationButton.alpha = 1.0
                 })
             } else {
-                UIView.animateWithDuration(0.6, animations: {
+                UIView.animateWithDuration(0.1, animations: {
                     animationButton.center = centerPoint
                     }, completion: {
                         (value: Bool) in
