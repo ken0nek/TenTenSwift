@@ -110,7 +110,7 @@ class CustomImageView: UIImageView {
         for animationButton in animationButtons {
             if animationButton.type == type.toRaw() {
                 UIView.animateWithDuration(0.6, animations: {
-                    animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                    animationButton.transform = CGAffineTransformMakeScale(1.4, 1.4)
                     animationButton.alpha = 0.4
                     }, completion: {
                         (value: Bool) in
@@ -182,6 +182,21 @@ class CustomImageView: UIImageView {
                                 
                                 panGestureRecognizer.enabled = false
                                 self.removeFromSuperview()
+                                customImageView.alpha = 0.0
+                                
+                                let newImageView = CustomImageView(point: CGPointMake(customImageView.frame.origin.x, customImageView.frame.origin.y), number: newFraction)
+                                newImageView.alpha = 0.4
+                                newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+                                
+                                UIView.animateWithDuration(0.4, animations: {
+                                    customImageView.superview!.addSubview(newImageView)
+                                    newImageView.alpha = 1.0
+                                    newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                                    }, completion: {
+                                        (value: Bool) in
+                                        customImageView.removeFromSuperview()
+                                })
+                                
                             } else { // Intersect but no action
                                 
                             }
