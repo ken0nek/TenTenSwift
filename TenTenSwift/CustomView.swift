@@ -10,7 +10,6 @@ import UIKit
 
 class CustomView: UIView {
     
-    // var customButton: CustomButton = CustomButton(point: CGPointMake(0, 0))
     var customImageView: CustomImageView = CustomImageView(point: CGPointMake(0, 0), number: Fraction())
     
     override init(frame: CGRect) {
@@ -19,9 +18,6 @@ class CustomView: UIView {
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)
-        
-//        customButton.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-//        self.addSubview(customButton)
         
         customImageView.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
         self.addSubview(customImageView)
@@ -39,7 +35,6 @@ class CustomView: UIView {
     
     func didDrag(panGestureRecognizer: UIPanGestureRecognizer) {
         self.superview!.bringSubviewToFront(self)
-        // self.bringSubviewToFront(customButton)
         self.bringSubviewToFront(customImageView)
         
         let myCenterPoint = self.center
@@ -48,7 +43,7 @@ class CustomView: UIView {
         
         updateTranslationLabel(translation)
 
-        let targetPoint = myCenterPoint.addPoint(translation)
+        let targetPoint = myCenterPoint.add(translation)
         
         self.center = targetPoint
         
@@ -58,8 +53,6 @@ class CustomView: UIView {
             if let customView = someView as? CustomView {
                 if !customView.isEqual(self) {
                     if CGRectIntersectsRect(customView.frame, self.frame) {
-                        
-                        // let customButton = customView.customButton
                         let customImageView = customView.customImageView
                         if customImageView.isActive == true {
                             println("Active")

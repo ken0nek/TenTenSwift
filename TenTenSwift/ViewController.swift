@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 
 extension CGPoint {
-    func addPoint(point: CGPoint) -> CGPoint {
+    func add(point: CGPoint) -> CGPoint {
         return CGPointMake(self.x + point.x, self.y + point.y)
     }
 }
@@ -23,26 +23,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        display()
-
-        let fraction1 = Fraction(numerator: 5, denominator: 4)
-        let imv = CustomImageView(point: CGPointMake(0, 0), number: fraction1)
-        self.view.addSubview(imv)
+        display2()
     }
 
-    func display() {
-        
-        let customView1 = CustomView(point: CGPointMake(0, 220))
-        self.view.addSubview(customView1)
+//    func display1() {
+//        
+//        let customView1 = CustomView(point: CGPointMake(0, 220))
+//        self.view.addSubview(customView1)
+//
+//        let customView2 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y))
+//        self.view.addSubview(customView2)
+//        
+//        let customView3 = CustomView(point: CGPointMake(customView1.frame.origin.x, customView1.frame.origin.y + customView1.frame.size.height))
+//        self.view.addSubview(customView3)
+//
+//        let customView4 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y + customView1.frame.size.height))
+//        self.view.addSubview(customView4)
+//    }
 
-        let customView2 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y))
-        self.view.addSubview(customView2)
-        
-        let customView3 = CustomView(point: CGPointMake(customView1.frame.origin.x, customView1.frame.origin.y + customView1.frame.size.height))
-        self.view.addSubview(customView3)
-
-        let customView4 = CustomView(point: CGPointMake(customView1.frame.origin.x + customView1.frame.size.width, customView1.frame.origin.y + customView1.frame.size.height))
-        self.view.addSubview(customView4)
+    func display2() {
+        let positionArray: [CGPoint] = [CGPointMake(70, 300), CGPointMake(190, 300), CGPointMake(70, 420), CGPointMake(190, 420)];
+        let fractionArray: [Fraction] = [Fraction(numerator: 5), Fraction(numerator: 2), Fraction(numerator: 3), Fraction(numerator: 4)]
+        for i in 0 ..< 4 {
+            let imageView = CustomImageView(point: positionArray[i], number: fractionArray[i])
+            self.view.addSubview(imageView)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,12 +57,12 @@ class ViewController: UIViewController {
     
     @IBAction func reset() {
         for someView in self.view.subviews {
-            if let customView = someView as? CustomView {
-                customView.removeFromSuperview()
+            if let customImageView = someView as? CustomImageView {
+                customImageView.removeFromSuperview()
             }
         }
 
-        display()
+        display2()
     }
 }
 

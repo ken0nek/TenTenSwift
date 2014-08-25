@@ -51,7 +51,7 @@ class CustomButton: UIButton {
                 initialSpringVelocity: 0,
                 options: UIViewAnimationOptions.CurveLinear,
                 animations: {
-                    animationButton.center = centerPoint.addPoint(point);
+                    animationButton.center = centerPoint.add(point);
                 }, completion: {
                     (value: Bool) in
             })

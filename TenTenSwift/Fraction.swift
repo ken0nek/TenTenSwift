@@ -104,35 +104,35 @@ class Fraction: NSObject {
     func calculate(fraction: Fraction, type: OperatorType) -> Fraction {
         var newFraction = Fraction()
         switch type {
-        case .Add: newFraction = addFraction(fraction)
-        case .Divide: newFraction = divideFraction(fraction)
-        case .Subtract: newFraction = subtractFraction(fraction)
-        case .Multiply: newFraction = multiplyFraction(fraction)
+        case .Add: newFraction = add(fraction)
+        case .Subtract: newFraction = subtract(fraction)
+        case .Multiply: newFraction = multiply(fraction)
+        case .Divide: newFraction = divide(fraction)
         }
         
         descriptionOfCalculation(fraction, type: type, newFraction: newFraction)
         return newFraction
     }
     
-    func addFraction(fraction: Fraction) -> Fraction {
+    func add(fraction: Fraction) -> Fraction {
         let newNumerator = numerator * fraction.denominator + denominator * fraction.numerator
         let newDenominator = denominator * fraction.denominator
         return Fraction(numerator: newNumerator, denominator: newDenominator)
     }
     
-    func subtractFraction(fraction: Fraction) -> Fraction {
+    func subtract(fraction: Fraction) -> Fraction {
         let newFraction = Fraction(numerator: -fraction.numerator, denominator: fraction.denominator)
-        return addFraction(newFraction)
+        return add(newFraction)
     }
     
-    func multiplyFraction(fraction: Fraction) -> Fraction {
+    func multiply(fraction: Fraction) -> Fraction {
         let newNumerator = numerator * fraction.numerator
         let newDenominator = denominator * fraction.denominator
         return Fraction(numerator: newNumerator, denominator: newDenominator)
     }
     
-    func divideFraction(fraction: Fraction) -> Fraction {
+    func divide(fraction: Fraction) -> Fraction {
         let newFraction = fraction.inverse()
-        return multiplyFraction(newFraction)
+        return multiply(newFraction)
     }
 }
