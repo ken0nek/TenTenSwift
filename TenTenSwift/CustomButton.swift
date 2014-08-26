@@ -8,7 +8,8 @@
 
 import UIKit
 
-let commandIconPrefixString: String = "command_icon"
+let CommandIconPrefixString: String = "command_icon"
+let GameLevelSelectPrefixString: String = "gameLevelSelect"
 
 enum Direction {
     case Right, Left, Up, Down
@@ -50,6 +51,7 @@ class CustomButton: UIButton {
         
         for animationButton in animationButtons {
             animationButton.setBackgroundImage(UIImage(named: imageNamePrefix + "\(animationButton.type.toInt())"), forState: UIControlState.Normal)
+            animationButton.frame = CGRectMake(0, 0, self.frame.size.width * 1.5, self.frame.size.height * 1.5)
         }
     }
     
@@ -97,7 +99,7 @@ class CustomButton: UIButton {
         isActive = true
         
         let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        let radius: Int = 55
+        let radius: Int = Int(self.frame.size.width * 0.8)
         
         for animationButton in animationButtons {
             animationButton.center = centerPoint
@@ -125,7 +127,7 @@ class CustomButton: UIButton {
         
         for animationButton in animationButtons {
             
-            UIView.animateWithDuration(0.1, animations: {
+            UIView.animateWithDuration(0.2, animations: {
                     animationButton.center = centerPoint
                 }, completion: {
                     (value: Bool) in
@@ -170,4 +172,42 @@ class CustomButton: UIButton {
     }
     */
 
+}
+
+class GameLevelSelectButton: CustomButton {
+    
+    let gameManager: GameManager = GameManager.sharedManager()
+    
+    override init(frame: CGRect, imageNamePrefix: String)  {
+        super.init(frame: frame, imageNamePrefix: imageNamePrefix)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func didSwipe(swipeGestureRecognizer: UISwipeGestureRecognizer) {
+        self.superview!.bringSubviewToFront(self)
+        var direction: Direction = .Right
+        switch swipeGestureRecognizer.direction.toRaw() {
+        case 1:
+            println("right")
+            direction = .Right
+            gameManager.gameLevel = .Easy
+        case 2:
+            println("left")
+            direction = .Left
+            gameManager.gameLevel = .Hard
+        case 4:
+            println("up")
+            direction = .Up
+            gameManager.gameLevel = .Normal
+        case 8:
+            println("down")
+            direction = .Down
+        default: println("undefined")
+        }
+        
+        execute(direction.toOperatorType())
+    }
 }

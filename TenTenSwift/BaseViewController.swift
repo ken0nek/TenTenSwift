@@ -9,6 +9,9 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    let gameManager: GameManager = GameManager.sharedManager()
+    let positionArray: [CGPoint] = [CGPointMake(70, 300), CGPointMake(190, 300), CGPointMake(70, 420), CGPointMake(190, 420)];
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,44 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func startNewGame(continueOrNot: Bool) {
+        if !continueOrNot {
+            gameManager.problemIndex = Int(arc4random_uniform(gameManager.problemsCount()))
+        }
+        
+        refresh()
+        display()
+    }
+    
+    private func display() {
+        for i in 0 ..< 4 {
+            let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: CommandIconPrefixString)
+            
+            imageView.alpha = 0.4
+            imageView.transform = CGAffineTransformMakeScale(0.6, 0.6)
+            imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 180 * -20))
+            self.view.addSubview(imageView)
+            
+            UIView.animateWithDuration(0.8, animations: {
+                imageView.alpha = 1.0
+                imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                imageView.transform = CGAffineTransformMakeRotation(0)
+                }, completion: {
+                    (value: Bool) in
+                    
+            })
+        }
+    }
+    
+    private func refresh() {
+        for someView in self.view.subviews {
+            if let customImageView = someView as? CustomImageView {
+                customImageView.removeFromSuperview()
+            }
+        }
+    }
+    
+    
     /*
     // MARK: - Navigation
 

@@ -28,7 +28,7 @@ class AnimationButton: UIButton {
         self.type = type
         super.init(frame: frame)
         self.addTarget(self, action: Selector("didPressAnimationButton"), forControlEvents: UIControlEvents.TouchUpInside)
-        self.userInteractionEnabled = true
+        self.userInteractionEnabled = false
     }
     
     convenience init(point: CGPoint, type: OperatorType) {

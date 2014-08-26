@@ -28,7 +28,7 @@ class CustomImageView: UIImageView {
         self.imageNamePrefix = imageNamePrefix
         super.init(frame: frame)
         self.userInteractionEnabled = true
-        // self.backgroundColor = UIColor.cyanColor()
+        self.image = UIImage(named: "numberBackground")
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)
@@ -99,7 +99,7 @@ class CustomImageView: UIImageView {
         
         for animationButton in animationButtons {
             
-            UIView.animateWithDuration(0.1, animations: {
+            UIView.animateWithDuration(0.2, animations: {
                 animationButton.center = centerPoint
                 }, completion: {
                     (value: Bool) in
@@ -140,9 +140,6 @@ class CustomImageView: UIImageView {
         
         let myCenterPoint = self.center
         let translation = panGestureRecognizer.translationInView(self)
-        // println("translation : \(translation)")
-        
-        updateTranslationLabel(translation)
         
         let targetPoint = myCenterPoint.add(translation)
         
@@ -156,32 +153,25 @@ class CustomImageView: UIImageView {
                     if CGRectIntersectsRect(customImageView.frame, self.frame) {
                         if customImageView.isActive == true {
                             println("Active")
-                            let sensitivity = CGFloat(15)
-                            var direction = ""
+                            let sensitivity = CGFloat(13)
                             var type = OperatorType.Add
                             if translation.x > sensitivity || translation.x < -sensitivity || translation.y > sensitivity || translation.y < -sensitivity {
                                 if translation.x > sensitivity {
                                     println("right")
-                                    direction = "right"
                                     type = .Add
                                 } else if translation.x < -sensitivity {
                                     println("left")
-                                    direction = "left"
                                     type = .Subtract
                                 } else if translation.y > sensitivity {
                                     println("down")
-                                    direction = "down"
                                     type = .Divide
                                 } else if translation.y < -sensitivity {
                                     println("up")
-                                    direction = "up"
                                     type = .Multiply
                                 } else {
                                     println("undefined")
-                                    direction = "undefined"
                                     customImageView.dismiss()
                                 }
-                                updateDirectionLabel(direction)
                                 customImageView.execute(type)
                                 
                                 let newFraction = customImageView.number.calculate(self.number, type: type)
@@ -216,18 +206,6 @@ class CustomImageView: UIImageView {
                 }
             }
         }
-    }
-    
-    
-    
-    func updateDirectionLabel(direction: String) {
-        let directionLabel = self.superview!.viewWithTag(1) as UILabel
-        directionLabel.text = "direction : \(direction)"
-    }
-    
-    func updateTranslationLabel(translation: CGPoint) {
-        let translationLabel = self.superview!.viewWithTag(2) as UILabel
-        translationLabel.text = "translation : \(translation)"
     }
     
     /*
