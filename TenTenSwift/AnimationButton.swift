@@ -20,8 +20,6 @@ enum OperatorType {
     }
 }
 
-let commandIconPrefixString: String = "command_icon_"
-
 class AnimationButton: UIButton {
     
     var type: OperatorType

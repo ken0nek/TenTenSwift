@@ -8,6 +8,8 @@
 
 import UIKit
 
+let commandIconPrefixString: String = "command_icon"
+
 enum Direction {
     case Right, Left, Up, Down
     
@@ -34,7 +36,7 @@ class CustomButton: UIButton {
     init(frame: CGRect, imageNamePrefix: String) {
         self.imageNamePrefix = imageNamePrefix
         super.init(frame: frame)
-        self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
+        self.setBackgroundImage(UIImage(named: self.imageNamePrefix), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchDown)
         self.addTarget(self, action: Selector("didReleaseButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
