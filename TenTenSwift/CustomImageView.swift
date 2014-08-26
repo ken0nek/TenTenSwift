@@ -10,12 +10,12 @@ import UIKit
 
 class CustomImageView: UIImageView {
 
-    var number: Fraction
-    var animationButtons: [AnimationButton] =
-    [AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Add.toRaw()),
-        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Divide.toRaw()),
-        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Subtract.toRaw()),
-        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Multiply.toRaw())]
+    let number: Fraction
+    let animationButtons: [AnimationButton] =
+    [AnimationButton(point: CGPointMake(0, 0), type: .Add),
+        AnimationButton(point: CGPointMake(0, 0), type: .Divide),
+        AnimationButton(point: CGPointMake(0, 0), type: .Subtract),
+        AnimationButton(point: CGPointMake(0, 0), type: .Multiply)]
     var isActive: Bool = false
     
     required init(coder aDecoder: NSCoder) {
@@ -71,7 +71,9 @@ class CustomImageView: UIImageView {
             animationButton.center = centerPoint
             self.addSubview(animationButton)
             
-            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))))
+//            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type.toRaw()))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type.toRaw()))))
+            
+            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(0))), y: radius * Int(sinf(Float(M_PI_2) * Float(0))))
             
             UIView.animateWithDuration(0.4,
                 delay: 0,
@@ -108,7 +110,7 @@ class CustomImageView: UIImageView {
         let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
         
         for animationButton in animationButtons {
-            if animationButton.type == type.toRaw() {
+            if animationButton.type == type {
                 UIView.animateWithDuration(0.6, animations: {
                     animationButton.transform = CGAffineTransformMakeScale(1.4, 1.4)
                     animationButton.alpha = 0.4
@@ -157,19 +159,19 @@ class CustomImageView: UIImageView {
                                 if translation.x > sensitivity {
                                     println("right")
                                     direction = "right"
-                                    type = OperatorType.Add
+                                    type = .Add
                                 } else if translation.x < -sensitivity {
                                     println("left")
                                     direction = "left"
-                                    type = OperatorType.Subtract
+                                    type = .Subtract
                                 } else if translation.y > sensitivity {
                                     println("down")
                                     direction = "down"
-                                    type = OperatorType.Divide
+                                    type = .Divide
                                 } else if translation.y < -sensitivity {
                                     println("up")
                                     direction = "up"
-                                    type = OperatorType.Multiply
+                                    type = .Multiply
                                 } else {
                                     println("undefined")
                                     direction = "undefined"
@@ -211,6 +213,8 @@ class CustomImageView: UIImageView {
             }
         }
     }
+    
+    
     
     func updateDirectionLabel(direction: String) {
         let directionLabel = self.superview!.viewWithTag(1) as UILabel

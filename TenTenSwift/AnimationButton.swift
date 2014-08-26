@@ -8,23 +8,31 @@
 
 import UIKit
 
-enum OperatorType: Int {
-    case Add = 0, Subtract = 2, Multiply = 3, Divide = 1
+enum OperatorType {
+    case Add, Subtract, Multiply, Divide
+    func toRaw() -> Int {
+        switch self {
+        case .Add: return 0
+        case .Subtract: return 2
+        case .Multiply: return 3
+        case .Divide: return 1
+        }
+    }
 }
 
 class AnimationButton: UIButton {
     
-    var type: Int
+    var type: OperatorType
 
-    init(frame: CGRect, type: Int) {
+    init(frame: CGRect, type: OperatorType) {
         self.type = type
         super.init(frame: frame)
-        self.setBackgroundImage(UIImage(named: "command_icon_\(type)"), forState: UIControlState.Normal)
+        self.setBackgroundImage(UIImage(named: "command_icon_\(type.toRaw())"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressAnimationButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
     }
     
-    convenience init(point: CGPoint, type: Int) {
+    convenience init(point: CGPoint, type: OperatorType) {
         let width = CGFloat(40)
         let height = CGFloat(40)
         self.init(frame: CGRectMake(point.x, point.y, width, height), type: type)
