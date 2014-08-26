@@ -17,6 +17,7 @@ extension CGPoint {
 
 class ViewController: BaseViewController {
 
+@IBOutlet weak var answerLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -33,12 +34,17 @@ class ViewController: BaseViewController {
     }
 
     @IBAction func replay2() {
+        answerLabel.text = "Do not Google !"
         startNewGame(true)
-}
+    }
 
     @IBAction func reset2() {
-    startNewGame(false)
-}
+        answerLabel.text = "Do it yourself !"
+        startNewGame(false)
+    }
     
+    @IBAction func showAnswer() {
+        answerLabel.text = gameManager.getAnswer()
+    }
 }
 
