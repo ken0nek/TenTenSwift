@@ -25,6 +25,10 @@
 		4AB4F12119ACE4F200724C12 /* gameLevelSelect2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4F11C19ACE4F200724C12 /* gameLevelSelect2@2x.png */; };
 		4AB4F12219ACE4F200724C12 /* gameLevelSelect3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4F11D19ACE4F200724C12 /* gameLevelSelect3@2x.png */; };
 		4AB4F12419ACE9F500724C12 /* numberBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4F12319ACE9F500724C12 /* numberBackground@2x.png */; };
+		4AB4F12919ACFF4B00724C12 /* operator2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4F12519ACFF4B00724C12 /* operator2@2x.png */; };
+		4AB4F12A19ACFF4B00724C12 /* operator0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4F12619ACFF4B00724C12 /* operator0@2x.png */; };
+		4AB4F12B19ACFF4B00724C12 /* operator3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4F12719ACFF4B00724C12 /* operator3@2x.png */; };
+		4AB4F12C19ACFF4B00724C12 /* operator1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4F12819ACFF4B00724C12 /* operator1@2x.png */; };
 		4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F3198F541B003FDBC5 /* BaseViewController.swift */; };
 		4AC611F6198F543C003FDBC5 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */; };
 		4AC611F8198F57A4003FDBC5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC611F7198F57A4003FDBC5 /* QuartzCore.framework */; };
@@ -69,6 +73,10 @@
 		4AB4F11C19ACE4F200724C12 /* gameLevelSelect2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameLevelSelect2@2x.png"; sourceTree = "<group>"; };
 		4AB4F11D19ACE4F200724C12 /* gameLevelSelect3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameLevelSelect3@2x.png"; sourceTree = "<group>"; };
 		4AB4F12319ACE9F500724C12 /* numberBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "numberBackground@2x.png"; sourceTree = "<group>"; };
+		4AB4F12519ACFF4B00724C12 /* operator2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "operator2@2x.png"; sourceTree = "<group>"; };
+		4AB4F12619ACFF4B00724C12 /* operator0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "operator0@2x.png"; sourceTree = "<group>"; };
+		4AB4F12719ACFF4B00724C12 /* operator3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "operator3@2x.png"; sourceTree = "<group>"; };
+		4AB4F12819ACFF4B00724C12 /* operator1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "operator1@2x.png"; sourceTree = "<group>"; };
 		4AC611F3198F541B003FDBC5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4AC611F5198F543C003FDBC5 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		4AC611F7198F57A4003FDBC5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -144,6 +152,10 @@
 				4AC611FB19946C99003FDBC5 /* command_icon2@2x.png */,
 				4AC611FC19946C99003FDBC5 /* command_icon3@2x.png */,
 				4AC611FD19946C99003FDBC5 /* command_icon@2x.png */,
+				4AB4F12519ACFF4B00724C12 /* operator2@2x.png */,
+				4AB4F12619ACFF4B00724C12 /* operator0@2x.png */,
+				4AB4F12719ACFF4B00724C12 /* operator3@2x.png */,
+				4AB4F12819ACFF4B00724C12 /* operator1@2x.png */,
 				4AB4F12319ACE9F500724C12 /* numberBackground@2x.png */,
 				4A22D72B195155F500A117EB /* Images.xcassets */,
 				4A22D722195155F500A117EB /* Supporting Files */,
@@ -263,10 +275,14 @@
 				4AB4F12019ACE4F200724C12 /* gameLevelSelect1@2x.png in Resources */,
 				4AC611FF19946C99003FDBC5 /* command_icon1@2x.png in Resources */,
 				4AC6120019946C99003FDBC5 /* command_icon2@2x.png in Resources */,
+				4AB4F12919ACFF4B00724C12 /* operator2@2x.png in Resources */,
 				4AB4F11F19ACE4F200724C12 /* gameLevelSelect0@2x.png in Resources */,
+				4AB4F12A19ACFF4B00724C12 /* operator0@2x.png in Resources */,
 				4A6DE47D19AC6DA6007BFDDD /* combination.csv in Resources */,
 				4A22D72A195155F500A117EB /* Main.storyboard in Resources */,
+				4AB4F12B19ACFF4B00724C12 /* operator3@2x.png in Resources */,
 				4AC611FE19946C99003FDBC5 /* command_icon0@2x.png in Resources */,
+				4AB4F12C19ACFF4B00724C12 /* operator1@2x.png in Resources */,
 				4AB4F11E19ACE4F200724C12 /* gameLevelSelect@2x.png in Resources */,
 				4AB4F12219ACE4F200724C12 /* gameLevelSelect3@2x.png in Resources */,
 				4A22D72C195155F500A117EB /* Images.xcassets in Resources */,

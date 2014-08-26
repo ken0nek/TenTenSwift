@@ -35,7 +35,7 @@ class BaseViewController: UIViewController {
     
     private func display() {
         for i in 0 ..< 4 {
-            let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: CommandIconPrefixString)
+            let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: "operator")
             
             imageView.alpha = 0.4
             imageView.transform = CGAffineTransformMakeScale(0.6, 0.6)
