@@ -16,20 +16,26 @@ class CustomImageView: UIImageView {
         AnimationButton(point: CGPointMake(0, 0), type: .Divide),
         AnimationButton(point: CGPointMake(0, 0), type: .Subtract),
         AnimationButton(point: CGPointMake(0, 0), type: .Multiply)]
+    let imageNamePrefix: String
     var isActive: Bool = false
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(frame: CGRect, number: Fraction) {
+    init(frame: CGRect, number: Fraction, imageNamePrefix: String) {
         self.number = number
+        self.imageNamePrefix = imageNamePrefix
         super.init(frame: frame)
         self.userInteractionEnabled = true
         // self.backgroundColor = UIColor.cyanColor()
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)
+        
+        for animationButton in animationButtons {
+            animationButton.setBackgroundImage(UIImage(named: imageNamePrefix + "\(animationButton.type.toInt())"), forState: UIControlState.Normal)
+        }
         
         if number.isFraction {
             let width = CGFloat(30)
@@ -55,10 +61,10 @@ class CustomImageView: UIImageView {
         }
     }
     
-    convenience init(point: CGPoint, number: Fraction) {
+    convenience init(point: CGPoint, number: Fraction, imageNamePrefix: String) {
         let width = CGFloat(60)
         let height = CGFloat(60)
-        self.init(frame: CGRectMake(point.x, point.y, width, height), number: number)
+        self.init(frame: CGRectMake(point.x, point.y, width, height), number: number, imageNamePrefix: imageNamePrefix)
     }
     
     func expand() {
@@ -184,7 +190,7 @@ class CustomImageView: UIImageView {
                                 self.removeFromSuperview()
                                 customImageView.alpha = 0.0
                                 
-                                let newImageView = CustomImageView(point: CGPointMake(customImageView.frame.origin.x, customImageView.frame.origin.y), number: newFraction)
+                                let newImageView = CustomImageView(point: CGPointMake(customImageView.frame.origin.x, customImageView.frame.origin.y), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix)
                                 newImageView.alpha = 0.4
                                 newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
                                 

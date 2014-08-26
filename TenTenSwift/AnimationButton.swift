@@ -20,6 +20,8 @@ enum OperatorType {
     }
 }
 
+let commandIconPrefixString: String = "command_icon_"
+
 class AnimationButton: UIButton {
     
     var type: OperatorType
@@ -27,7 +29,6 @@ class AnimationButton: UIButton {
     init(frame: CGRect, type: OperatorType) {
         self.type = type
         super.init(frame: frame)
-        self.setBackgroundImage(UIImage(named: "command_icon_\(type.toInt())"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressAnimationButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
     }

@@ -26,8 +26,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         display2()
 
-        let customView1 = CustomView(point: CGPointMake(160, 80))
-        self.view.addSubview(customView1)
+        let customButton = CustomButton(point: CGPointMake(160, 80), imageNamePrefix: commandIconPrefixString)
+        self.view.addSubview(customButton)
     }
 
 //    func display1() {
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         // let fractionArray: [Fraction] = [Fraction(numerator: 5), Fraction(numerator: 2), Fraction(numerator: 3), Fraction(numerator: 4)]
         gameManager.currentProblemIndex = Int(arc4random_uniform(340))
         for i in 0 ..< 4 {
-            let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]))
+            let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: commandIconPrefixString)
             self.view.addSubview(imageView)
         }
     }
