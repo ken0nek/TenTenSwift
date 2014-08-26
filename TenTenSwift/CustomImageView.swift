@@ -26,7 +26,7 @@ class CustomImageView: UIImageView {
         self.number = number
         super.init(frame: frame)
         self.userInteractionEnabled = true
-        self.backgroundColor = UIColor.cyanColor()
+        // self.backgroundColor = UIColor.cyanColor()
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)

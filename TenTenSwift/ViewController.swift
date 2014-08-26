@@ -19,11 +19,15 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var translationLabel: UILabel!
+    let gameManager: GameManager = GameManager.sharedManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         display2()
+
+        let customView1 = CustomView(point: CGPointMake(160, 80))
+        self.view.addSubview(customView1)
     }
 
 //    func display1() {
@@ -43,9 +47,10 @@ class ViewController: UIViewController {
 
     func display2() {
         let positionArray: [CGPoint] = [CGPointMake(70, 300), CGPointMake(190, 300), CGPointMake(70, 420), CGPointMake(190, 420)];
-        let fractionArray: [Fraction] = [Fraction(numerator: 5), Fraction(numerator: 2), Fraction(numerator: 3), Fraction(numerator: 4)]
+        // let fractionArray: [Fraction] = [Fraction(numerator: 5), Fraction(numerator: 2), Fraction(numerator: 3), Fraction(numerator: 4)]
+        gameManager.currentProblemIndex = Int(arc4random_uniform(340))
         for i in 0 ..< 4 {
-            let imageView = CustomImageView(point: positionArray[i], number: fractionArray[i])
+            let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]))
             self.view.addSubview(imageView)
         }
     }

@@ -10,21 +10,21 @@ import UIKit
 
 class CustomView: UIView {
     
-    var customImageView: CustomImageView = CustomImageView(point: CGPointMake(0, 0), number: Fraction())
+    var customButton: CustomButton = CustomButton(point: CGPointMake(0, 0))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.userInteractionEnabled = true
-        
+        self.backgroundColor = UIColor.brownColor()
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)
         
-        customImageView.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        self.addSubview(customImageView)
+        customButton.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
+        self.addSubview(customButton)
     }
     
     convenience init(point: CGPoint) {
-        let width = CGFloat(60)
+        let width = CGFloat(60) // 150
         let height = CGFloat(60)
         self.init(frame: CGRectMake(point.x, point.y, width, height))
     }
@@ -35,17 +35,17 @@ class CustomView: UIView {
     
     func didDrag(panGestureRecognizer: UIPanGestureRecognizer) {
         self.superview!.bringSubviewToFront(self)
-        self.bringSubviewToFront(customImageView)
+        self.bringSubviewToFront(customButton)
         
-        let myCenterPoint = self.center
+        // let myCenterPoint = self.center
         let translation = panGestureRecognizer.translationInView(self)
         // println("translation : \(translation)")
         
-        updateTranslationLabel(translation)
+        // updateTranslationLabel(translation)
 
-        let targetPoint = myCenterPoint.add(translation)
+        // let targetPoint = myCenterPoint.add(translation)
         
-        self.center = targetPoint
+        // self.center = targetPoint
         
         panGestureRecognizer.setTranslation(CGPointMake(0, 0), inView: self)
         
@@ -53,8 +53,8 @@ class CustomView: UIView {
             if let customView = someView as? CustomView {
                 if !customView.isEqual(self) {
                     if CGRectIntersectsRect(customView.frame, self.frame) {
-                        let customImageView = customView.customImageView
-                        if customImageView.isActive == true {
+                        let customButton = customView.customButton
+                        if customButton.isActive == true {
                             println("Active")
                             let sensitivity = CGFloat(15)
                             var direction = ""
@@ -79,41 +79,38 @@ class CustomView: UIView {
                                 } else {
                                     println("undefined")
                                     direction = "undefined"
-                                    customImageView.dismiss()
+                                    customButton.dismiss()
                                 }
-                                updateDirectionLabel(direction)
-                                customImageView.execute(type)
+                                // updateDirectionLabel(direction)
+                                customButton.execute(type)
                                 
-                                let fraction1 = Fraction(numerator: 5, denominator: 3)
-                                let fraction2 = Fraction(numerator: 3, denominator: 4)
-                                fraction1.calculate(fraction2, type: type)
+                                // panGestureRecognizer.enabled = false
+                                // self.removeFromSuperview()
                                 
-                                panGestureRecognizer.enabled = false
-                                self.removeFromSuperview()
                             } else { // Intersect but no action
                                 
                             }
                         } else {
                             println("Inactive")
-                            customImageView.expand()
+                            customButton.expand()
                         }
                     } else {
-                        customView.customImageView.dismiss()
+                        customView.customButton.dismiss()
                     }
                 }
             }
         }
     }
     
-    func updateDirectionLabel(direction: String) {
-        let directionLabel = self.superview!.viewWithTag(1) as UILabel
-        directionLabel.text = "direction : \(direction)"
-    }
-    
-    func updateTranslationLabel(translation: CGPoint) {
-        let translationLabel = self.superview!.viewWithTag(2) as UILabel
-        translationLabel.text = "translation : \(translation)"
-    }
+//    func updateDirectionLabel(direction: String) {
+//        let directionLabel = self.superview!.viewWithTag(1) as UILabel
+//        directionLabel.text = "direction : \(direction)"
+//    }
+//    
+//    func updateTranslationLabel(translation: CGPoint) {
+//        let translationLabel = self.superview!.viewWithTag(2) as UILabel
+//        translationLabel.text = "translation : \(translation)"
+//    }
 
     /*
     // Only override drawRect: if you perform custom drawing.

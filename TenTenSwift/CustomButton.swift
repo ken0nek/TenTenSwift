@@ -20,6 +20,7 @@ class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
+        self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchDown)
         self.userInteractionEnabled = true
     }
     
@@ -31,6 +32,10 @@ class CustomButton: UIButton {
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func didPressButton() {
+        expand()
     }
     
     func expand() {
@@ -81,7 +86,7 @@ class CustomButton: UIButton {
         
         for animationButton in animationButtons {
             if animationButton.type == type.toRaw() {
-                UIView.animateWithDuration(0.6, animations: {
+                UIView.animateWithDuration(0.4, animations: {
                     animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                     animationButton.alpha = 0.4
                     }, completion: {
