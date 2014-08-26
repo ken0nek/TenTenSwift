@@ -10,17 +10,18 @@ import UIKit
 
 class CustomButton: UIButton {
     
-    var animationButtons: [AnimationButton] =
-    [AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Add.toRaw()),
-        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Divide.toRaw()),
-        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Subtract.toRaw()),
-        AnimationButton(point: CGPointMake(0, 0), type: OperatorType.Multiply.toRaw())]
+    let animationButtons: [AnimationButton] =
+    [AnimationButton(point: CGPointMake(0, 0), type: .Add),
+        AnimationButton(point: CGPointMake(0, 0), type: .Divide),
+        AnimationButton(point: CGPointMake(0, 0), type: .Subtract),
+        AnimationButton(point: CGPointMake(0, 0), type: .Multiply)]
     var isActive: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setBackgroundImage(UIImage(named: "command_icon"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchDown)
+        self.addTarget(self, action: Selector("didReleaseButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
     }
     
@@ -38,6 +39,10 @@ class CustomButton: UIButton {
         expand()
     }
     
+    func didReleaseButton() {
+        dismiss()
+    }
+    
     func expand() {
         isActive = true
         
@@ -48,7 +53,7 @@ class CustomButton: UIButton {
             animationButton.center = centerPoint
             self.superview!.addSubview(animationButton)
             
-            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type))))
+            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type.toInt()))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type.toInt()))))
             
             UIView.animateWithDuration(0.4,
                 delay: 0,
@@ -85,7 +90,7 @@ class CustomButton: UIButton {
         let centerPoint = CGPointMake(self.superview!.frame.size.width / 2, self.superview!.frame.size.height / 2)
         
         for animationButton in animationButtons {
-            if animationButton.type == type.toRaw() {
+            if animationButton.type == type {
                 UIView.animateWithDuration(0.4, animations: {
                     animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                     animationButton.alpha = 0.4

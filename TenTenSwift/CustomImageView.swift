@@ -71,9 +71,7 @@ class CustomImageView: UIImageView {
             animationButton.center = centerPoint
             self.addSubview(animationButton)
             
-//            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type.toRaw()))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type.toRaw()))))
-            
-            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(0))), y: radius * Int(sinf(Float(M_PI_2) * Float(0))))
+            let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type.toInt()))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type.toInt()))))
             
             UIView.animateWithDuration(0.4,
                 delay: 0,

@@ -8,6 +8,19 @@
 
 import UIKit
 
+enum Direction {
+    case Right, Left, Up, Down
+    
+    func toOperatorType() -> OperatorType {
+        switch self {
+        case .Right: return .Add
+        case .Left: return .Subtract
+        case .Up: return .Multiply
+        case .Down: return .Divide
+        }
+    }
+}
+
 class CustomView: UIView {
     
     var customButton: CustomButton = CustomButton(point: CGPointMake(0, 0))
@@ -15,9 +28,14 @@ class CustomView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.userInteractionEnabled = true
-        self.backgroundColor = UIColor.brownColor()
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
-        self.addGestureRecognizer(panGestureRecognizer)
+        // self.backgroundColor = UIColor.brownColor()
+        
+        let directions: [UISwipeGestureRecognizerDirection] = [.Right, .Left, .Up, .Down]
+        for direction in directions {
+            let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("didSwipe:"))
+            swipeGestureRecognizer.direction = direction
+            self.addGestureRecognizer(swipeGestureRecognizer)
+        }
         
         customButton.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
         self.addSubview(customButton)
@@ -33,84 +51,26 @@ class CustomView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func didDrag(panGestureRecognizer: UIPanGestureRecognizer) {
-        self.superview!.bringSubviewToFront(self)
-        self.bringSubviewToFront(customButton)
-        
-        // let myCenterPoint = self.center
-        let translation = panGestureRecognizer.translationInView(self)
-        // println("translation : \(translation)")
-        
-        // updateTranslationLabel(translation)
-
-        // let targetPoint = myCenterPoint.add(translation)
-        
-        // self.center = targetPoint
-        
-        panGestureRecognizer.setTranslation(CGPointMake(0, 0), inView: self)
-        
-        for someView in self.superview!.subviews {
-            if let customView = someView as? CustomView {
-                if !customView.isEqual(self) {
-                    if CGRectIntersectsRect(customView.frame, self.frame) {
-                        let customButton = customView.customButton
-                        if customButton.isActive == true {
-                            println("Active")
-                            let sensitivity = CGFloat(15)
-                            var direction = ""
-                            var type = OperatorType.Add
-                            if translation.x > sensitivity || translation.x < -sensitivity || translation.y > sensitivity || translation.y < -sensitivity {
-                                if translation.x > sensitivity {
-                                    println("right")
-                                    direction = "right"
-                                    type = OperatorType.Add
-                                } else if translation.x < -sensitivity {
-                                    println("left")
-                                    direction = "left"
-                                    type = OperatorType.Subtract
-                                } else if translation.y > sensitivity {
-                                    println("down")
-                                    direction = "down"
-                                    type = OperatorType.Divide
-                                } else if translation.y < -sensitivity {
-                                    println("up")
-                                    direction = "up"
-                                    type = OperatorType.Multiply
-                                } else {
-                                    println("undefined")
-                                    direction = "undefined"
-                                    customButton.dismiss()
-                                }
-                                // updateDirectionLabel(direction)
-                                customButton.execute(type)
-                                
-                                // panGestureRecognizer.enabled = false
-                                // self.removeFromSuperview()
-                                
-                            } else { // Intersect but no action
-                                
-                            }
-                        } else {
-                            println("Inactive")
-                            customButton.expand()
-                        }
-                    } else {
-                        customView.customButton.dismiss()
-                    }
-                }
-            }
+    func didSwipe(swipeGestureRecognizer: UISwipeGestureRecognizer) {
+        var direction: Direction = .Right
+        switch swipeGestureRecognizer.direction.toRaw() {
+        case 1:
+            println("right")
+            direction = .Right
+        case 2:
+            println("left")
+            direction = .Left
+        case 4:
+            println("up")
+            direction = .Up
+        case 8:
+            println("down")
+            direction = .Down
+        default: println("undefined")
         }
+        
+        customButton.execute(direction.toOperatorType())
     }
-    
-//    func updateDirectionLabel(direction: String) {
-//        let directionLabel = self.superview!.viewWithTag(1) as UILabel
-//        directionLabel.text = "direction : \(direction)"
-//    }
-//    
-//    func updateTranslationLabel(translation: CGPoint) {
-//        let translationLabel = self.superview!.viewWithTag(2) as UILabel
-//        translationLabel.text = "translation : \(translation)"
-//    }
 
     /*
     // Only override drawRect: if you perform custom drawing.

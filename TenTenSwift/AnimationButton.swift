@@ -10,7 +10,7 @@ import UIKit
 
 enum OperatorType {
     case Add, Subtract, Multiply, Divide
-    func toRaw() -> Int {
+    func toInt() -> Int {
         switch self {
         case .Add: return 0
         case .Subtract: return 2
@@ -27,7 +27,7 @@ class AnimationButton: UIButton {
     init(frame: CGRect, type: OperatorType) {
         self.type = type
         super.init(frame: frame)
-        self.setBackgroundImage(UIImage(named: "command_icon_\(type.toRaw())"), forState: UIControlState.Normal)
+        self.setBackgroundImage(UIImage(named: "command_icon_\(type.toInt())"), forState: UIControlState.Normal)
         self.addTarget(self, action: Selector("didPressAnimationButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
     }
