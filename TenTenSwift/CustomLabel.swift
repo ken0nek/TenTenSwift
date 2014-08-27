@@ -17,7 +17,7 @@ class CustomLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.adjustsFontSizeToFitWidth = true
-        self.font = UIFont.systemFontOfSize(30)
+        self.font = UIFont.boldSystemFontOfSize(self.frame.size.height / 1.5)
         self.textColor = UIColor.blackColor()
         self.textAlignment = NSTextAlignment.Center
     }

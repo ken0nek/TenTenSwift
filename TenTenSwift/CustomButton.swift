@@ -104,7 +104,7 @@ class CustomButton: UIButton {
         isActive = true
         
         let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        let radius: Int = Int(self.frame.size.width * 0.9)
+        let radius: Int = Int(self.frame.size.width * 0.8)
         
         for animationButton in animationButtons {
             animationButton.center = centerPoint

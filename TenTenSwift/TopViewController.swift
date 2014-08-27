@@ -8,12 +8,15 @@
 
 import UIKit
 
-class TopViewController: UIViewController {
+class TopViewController: BaseViewController, GameLevelSelectButtonDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    
+        let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: GameLevelSelectPrefixString, delegate: self)
+        self.view.addSubview(gameLevelSelectButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +24,13 @@ class TopViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func gameLevelSelectButtonDidSwipe(direction: Direction) {
+        if direction != .Down {
+            gameManager.gameLevel = direction.toGameLevel()
+            let smVC = getViewController("Simple") as SimpleModeViewController
+            self.navigationController.pushViewController(smVC, animated: true)
+        }
+    }
 
     /*
     // MARK: - Navigation

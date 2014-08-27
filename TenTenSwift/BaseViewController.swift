@@ -8,15 +8,27 @@
 
 import UIKit
 
+let Origin = CGPointMake(55, 280)
+let Margin: CGFloat = 140
+let xMargin = CGPointMake(Margin, 0)
+let yMargin = CGPointMake(0, Margin)
+
+let FirstPoint = Origin
+let SecondPoint = CGPointMake(Origin.add(xMargin).x, Origin.y)
+let ThirdPoint = CGPointMake(Origin.x, Origin.add(yMargin).y)
+let FourthPoint = CGPointMake(Origin.add(xMargin).x, Origin.add(yMargin).y)
+
+let positionArray: [CGPoint] = [FirstPoint, SecondPoint, ThirdPoint, FourthPoint];
+
 class BaseViewController: UIViewController {
     
     let gameManager: GameManager = GameManager.sharedManager()
-    let positionArray: [CGPoint] = [CGPointMake(70, 300), CGPointMake(190, 300), CGPointMake(70, 420), CGPointMake(190, 420)];
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationItem.setHidesBackButton(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,7 +47,7 @@ class BaseViewController: UIViewController {
     
     private func display() {
         for i in 0 ..< 4 {
-            let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: "operator")
+            let imageView = CustomImageView(frame: CGRectMake(positionArray[i].x, positionArray[i].y, 70, 70), number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: "operator")
             
             imageView.alpha = 0.4
             imageView.transform = CGAffineTransformMakeScale(0.2, 0.2)
@@ -61,7 +73,11 @@ class BaseViewController: UIViewController {
         }
     }
     
-    
+    func getViewController(identifier: String) -> UIViewController {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil);
+        let viewController = mainStoryboard.instantiateViewControllerWithIdentifier(identifier) as UIViewController
+        return viewController
+    }
     /*
     // MARK: - Navigation
 

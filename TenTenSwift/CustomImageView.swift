@@ -39,8 +39,8 @@ class CustomImageView: UIImageView {
         }
         
         if number.isFraction {
-            let width = CGFloat(30)
-            let height = CGFloat(30)
+            let width = self.frame.size.width
+            let height = self.frame.size.height / 2
             
             let numeratorLabel = CustomLabel(frame: CGRectMake((self.frame.size.width - width) / 2, 0, width, height))
             let denominatorLabel = CustomLabel(frame: CGRectMake(numeratorLabel.frame.origin.x, numeratorLabel.frame.size.height, width, height))
@@ -51,8 +51,8 @@ class CustomImageView: UIImageView {
             self.addSubview(numeratorLabel)
             self.addSubview(denominatorLabel)
         } else {
-            let width = CGFloat(60)
-            let height = CGFloat(60)
+            let width = self.frame.size.width
+            let height = self.frame.size.height
             
             let numeratorLabel = CustomLabel(frame: CGRectMake((self.frame.size.width - width) / 2, 0, width, height))
             
@@ -72,7 +72,7 @@ class CustomImageView: UIImageView {
         isActive = true
         
         let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        let radius: Int = Int(self.frame.size.width * 0.9)
+        let radius: Int = Int(self.frame.size.width * 0.8)
         
         for animationButton in animationButtons {
             animationButton.center = centerPoint
@@ -176,7 +176,8 @@ class CustomImageView: UIImageView {
                                 self.removeFromSuperview()
                                 customImageView.alpha = 0.0
                                 
-                                let newImageView = CustomImageView(point: CGPointMake(customImageView.frame.origin.x, customImageView.frame.origin.y), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix)
+                                let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix)
+                                
                                 newImageView.alpha = 0.4
                                 newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
                                 
