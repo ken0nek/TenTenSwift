@@ -28,7 +28,7 @@ class CustomImageView: UIImageView {
         self.imageNamePrefix = imageNamePrefix
         super.init(frame: frame)
         self.userInteractionEnabled = true
-        self.image = UIImage(named: "numberBackground")
+        self.image = UIImage(named: "numberBackground\(number.isFraction.hashValue)")
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)

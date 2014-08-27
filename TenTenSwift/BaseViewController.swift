@@ -38,7 +38,7 @@ class BaseViewController: UIViewController {
             let imageView = CustomImageView(point: positionArray[i], number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: "operator")
             
             imageView.alpha = 0.4
-            imageView.transform = CGAffineTransformMakeScale(0.6, 0.6)
+            imageView.transform = CGAffineTransformMakeScale(0.2, 0.2)
             imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 180 * -20))
             self.view.addSubview(imageView)
             
