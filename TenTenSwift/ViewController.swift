@@ -15,7 +15,7 @@ extension CGPoint {
     }
 }
 
-class ViewController: BaseViewController {
+class ViewController: BaseViewController, GameLevelSelectButtonDelegate {
 
 @IBOutlet weak var answerLabel: UILabel!
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class ViewController: BaseViewController {
 
         startNewGame(true)
 
-        let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: GameLevelSelectPrefixString)
+        let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: GameLevelSelectPrefixString, delegate: self)
         self.view.addSubview(gameLevelSelectButton)
     }
 
@@ -45,6 +45,15 @@ class ViewController: BaseViewController {
     
     @IBAction func showAnswer() {
         answerLabel.text = gameManager.getAnswer()
+    }
+
+    func gameLevelSelectButtonDidSwipe(direction: Direction) {
+        if direction != .Down {
+            if gameManager.gameLevel != direction.toGameLevel() {
+                gameManager.gameLevel = direction.toGameLevel()
+                startNewGame(false)
+            }
+        }
     }
 }
 

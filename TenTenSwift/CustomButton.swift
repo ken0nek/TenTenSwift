@@ -22,6 +22,15 @@ enum Direction {
         case .Down: return .Divide
         }
     }
+    
+    func toGameLevel() -> GameLevel {
+        switch self {
+        case .Right: return .Easy
+        case .Left: return .Hard
+        case .Up: return .Normal
+        case .Down: return .Easy
+        }
+    }
 }
 
 class CustomButton: UIButton {
@@ -41,7 +50,7 @@ class CustomButton: UIButton {
         self.addTarget(self, action: Selector("didPressButton"), forControlEvents: UIControlEvents.TouchDown)
         self.addTarget(self, action: Selector("didReleaseButton"), forControlEvents: UIControlEvents.TouchUpInside)
         self.userInteractionEnabled = true
-    
+        
         let directions: [UISwipeGestureRecognizerDirection] = [.Right, .Left, .Up, .Down]
         for direction in directions {
             let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("didSwipe:"))
@@ -51,7 +60,7 @@ class CustomButton: UIButton {
         
         for animationButton in animationButtons {
             animationButton.setBackgroundImage(UIImage(named: imageNamePrefix + "\(animationButton.type.toInt())"), forState: UIControlState.Normal)
-            animationButton.frame = CGRectMake(0, 0, self.frame.size.width * 1.5, self.frame.size.height * 1.5)
+            animationButton.frame = CGRectMake(0, 0, self.frame.size.width / 1.2, self.frame.size.height / 1.2)
         }
     }
     
@@ -70,16 +79,12 @@ class CustomButton: UIButton {
         var direction: Direction = .Right
         switch swipeGestureRecognizer.direction.toRaw() {
         case 1:
-            println("right")
             direction = .Right
         case 2:
-            println("left")
             direction = .Left
         case 4:
-            println("up")
             direction = .Up
         case 8:
-            println("down")
             direction = .Down
         default: println("undefined")
         }
@@ -99,7 +104,7 @@ class CustomButton: UIButton {
         isActive = true
         
         let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        let radius: Int = Int(self.frame.size.width * 0.8)
+        let radius: Int = Int(self.frame.size.width * 0.9)
         
         for animationButton in animationButtons {
             animationButton.center = centerPoint
@@ -174,11 +179,16 @@ class CustomButton: UIButton {
 
 }
 
+protocol GameLevelSelectButtonDelegate: class {
+    func gameLevelSelectButtonDidSwipe(direction: Direction)
+}
+
 class GameLevelSelectButton: CustomButton {
     
-    let gameManager: GameManager = GameManager.sharedManager()
+    var delegate: GameLevelSelectButtonDelegate?
     
-    override init(frame: CGRect, imageNamePrefix: String)  {
+    init(frame: CGRect, imageNamePrefix: String, delegate: GameLevelSelectButtonDelegate)  {
+        self.delegate = delegate
         super.init(frame: frame, imageNamePrefix: imageNamePrefix)
     }
     
@@ -191,23 +201,17 @@ class GameLevelSelectButton: CustomButton {
         var direction: Direction = .Right
         switch swipeGestureRecognizer.direction.toRaw() {
         case 1:
-            println("right")
             direction = .Right
-            gameManager.gameLevel = .Easy
         case 2:
-            println("left")
             direction = .Left
-            gameManager.gameLevel = .Hard
         case 4:
-            println("up")
             direction = .Up
-            gameManager.gameLevel = .Normal
         case 8:
-            println("down")
             direction = .Down
         default: println("undefined")
         }
         
+        delegate?.gameLevelSelectButtonDidSwipe(direction)
         execute(direction.toOperatorType())
     }
 }

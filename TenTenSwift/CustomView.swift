@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol CustomProtocol {
+    
+}
+
 class CustomView: UIView {
 
+    func hoge() {
+        
+    }
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

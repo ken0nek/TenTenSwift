@@ -35,6 +35,7 @@ class CustomImageView: UIImageView {
         
         for animationButton in animationButtons {
             animationButton.setBackgroundImage(UIImage(named: imageNamePrefix + "\(animationButton.type.toInt())"), forState: UIControlState.Normal)
+            animationButton.frame = CGRectMake(0, 0, self.frame.size.width / 1.5, self.frame.size.height / 1.5)
         }
         
         if number.isFraction {
@@ -71,7 +72,7 @@ class CustomImageView: UIImageView {
         isActive = true
         
         let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        let radius: Int = 55
+        let radius: Int = Int(self.frame.size.width * 0.9)
         
         for animationButton in animationButtons {
             animationButton.center = centerPoint
@@ -152,24 +153,19 @@ class CustomImageView: UIImageView {
                 if !customImageView.isEqual(self) {
                     if CGRectIntersectsRect(customImageView.frame, self.frame) {
                         if customImageView.isActive == true {
-                            println("Active")
+                            // Active
                             let sensitivity = CGFloat(13)
                             var type = OperatorType.Add
                             if translation.x > sensitivity || translation.x < -sensitivity || translation.y > sensitivity || translation.y < -sensitivity {
                                 if translation.x > sensitivity {
-                                    println("right")
                                     type = .Add
                                 } else if translation.x < -sensitivity {
-                                    println("left")
                                     type = .Subtract
                                 } else if translation.y > sensitivity {
-                                    println("down")
                                     type = .Divide
                                 } else if translation.y < -sensitivity {
-                                    println("up")
                                     type = .Multiply
                                 } else {
-                                    println("undefined")
                                     customImageView.dismiss()
                                 }
                                 customImageView.execute(type)
@@ -197,7 +193,7 @@ class CustomImageView: UIImageView {
                                 
                             }
                         } else {
-                            println("Inactive")
+                            // Inactive
                             customImageView.expand()
                         }
                     } else { // Not intersect
