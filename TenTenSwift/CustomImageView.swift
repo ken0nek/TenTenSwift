@@ -18,6 +18,7 @@ class CustomImageView: UIImageView {
         AnimationButton(point: CGPointMake(0, 0), type: .Multiply)]
     let imageNamePrefix: String
     var isActive: Bool = false
+    let gameManager: GameManager = GameManager.sharedManager()
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

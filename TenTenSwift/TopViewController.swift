@@ -28,7 +28,7 @@ class TopViewController: BaseViewController, GameLevelSelectButtonDelegate {
         if direction != .Down {
             gameManager.gameLevel = direction.toGameLevel()
             let smVC = getViewController("Simple") as SimpleModeViewController
-            self.navigationController.pushViewController(smVC, animated: true)
+            self.navigationController.pushViewController(smVC, animated: false)
         }
     }
 

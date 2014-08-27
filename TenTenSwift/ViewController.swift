@@ -22,7 +22,7 @@ class ViewController: BaseViewController, GameLevelSelectButtonDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        startNewGame(true)
+        showProblemWithRepeat(true)
 
         let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: GameLevelSelectPrefixString, delegate: self)
         self.view.addSubview(gameLevelSelectButton)
@@ -35,12 +35,12 @@ class ViewController: BaseViewController, GameLevelSelectButtonDelegate {
 
     @IBAction func replay2() {
         answerLabel.text = "Do not Google !"
-        startNewGame(true)
+        showProblemWithRepeat(true)
     }
 
     @IBAction func reset2() {
         answerLabel.text = "Do it yourself !"
-        startNewGame(false)
+        showProblemWithRepeat(false)
     }
     
     @IBAction func showAnswer() {
@@ -51,7 +51,7 @@ class ViewController: BaseViewController, GameLevelSelectButtonDelegate {
         if direction != .Down {
             if gameManager.gameLevel != direction.toGameLevel() {
                 gameManager.gameLevel = direction.toGameLevel()
-                startNewGame(false)
+                showProblemWithRepeat(false)
             }
         }
     }

@@ -36,13 +36,14 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func startNewGame(continueOrNot: Bool) {
-        if !continueOrNot {
+    func showProblemWithRepeat(repeat: Bool) {
+        if !repeat {
             gameManager.problemIndex = Int(arc4random_uniform(gameManager.problemsCount()))
         }
         
         refresh()
         display()
+        gameManager.rest = 4
     }
     
     private func display() {
