@@ -38,14 +38,6 @@ extension Int {
     }
 }
 
-protocol GameManagerDelegate: class {
-    func gameWillStart(gameManager: GameManager)
-    func gameDidStart(gameManager: GameManager)
-    func gameDidNotClear(gameManager: GameManager)
-    func gameWillFinish(gameManager: GameManager)
-    func gameDidFinish(gameManager: GameManager)
-}
-
 class GameManager: NSObject {
     var gameLevel: GameLevel = .Easy
     var problemIndex: Int = 0
@@ -55,8 +47,6 @@ class GameManager: NSObject {
             return loadProblemsByLevel()
         }
     }
-    var rest: Int = 4
-    var delegate: GameManagerDelegate?
 
     class func sharedManager() -> GameManager {
         struct Singleton {

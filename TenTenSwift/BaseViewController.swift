@@ -20,7 +20,7 @@ let FourthPoint = CGPointMake(Origin.add(xMargin).x, Origin.add(yMargin).y)
 
 let positionArray: [CGPoint] = [FirstPoint, SecondPoint, ThirdPoint, FourthPoint];
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, GameDelegate {
     
     let gameManager: GameManager = GameManager.sharedManager()
 
@@ -43,19 +43,18 @@ class BaseViewController: UIViewController {
         
         refresh()
         display()
-        gameManager.rest = 4
     }
     
     private func display() {
         for i in 0 ..< 4 {
-            let imageView = CustomImageView(frame: CGRectMake(positionArray[i].x, positionArray[i].y, 70, 70), number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: "operator")
+            let imageView = CustomImageView(frame: CGRectMake(positionArray[i].x, positionArray[i].y, 70, 70), number: Fraction(numerator: gameManager.getNumbers()[i]), imageNamePrefix: "operator", delegate: self)
             
             imageView.alpha = 0.4
             imageView.transform = CGAffineTransformMakeScale(0.2, 0.2)
             imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 180 * -20))
             self.view.addSubview(imageView)
             
-            UIView.animateWithDuration(0.8, animations: {
+            UIView.animateWithDuration(0.3, animations: {
                 imageView.alpha = 1.0
                 imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 imageView.transform = CGAffineTransformMakeRotation(0)
@@ -79,6 +78,75 @@ class BaseViewController: UIViewController {
         let viewController = mainStoryboard.instantiateViewControllerWithIdentifier(identifier) as UIViewController
         return viewController
     }
+    
+    func gameWillClear(customImageView: CustomImageView) {
+        let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: Fraction(numerator: 10), imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
+        
+        newImageView.alpha = 0.0
+        newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+        
+        UIView.animateWithDuration(0.4, animations: {
+            customImageView.superview!.addSubview(newImageView)
+            newImageView.alpha = 1.0
+            newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            }, completion: {
+                (value: Bool) in
+                customImageView.alpha = 0.0
+                customImageView.removeFromSuperview()
+        })
+    }
+    
+    func gameDidClear(customImageView: CustomImageView) {
+        
+    }
+    
+    func gameWillStart(customImageView: CustomImageView) {
+        
+    }
+    
+    func gameDidStart(customImageView: CustomImageView) {
+        
+    }
+    
+    func gameWillNotClear(customImageView: CustomImageView, _ newFraction: Fraction) {
+        let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
+        
+        newImageView.alpha = 0.0
+        newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+        
+        UIView.animateWithDuration(0.4, animations: {
+            customImageView.superview!.addSubview(newImageView)
+            newImageView.alpha = 1.0
+            newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            }, completion: {
+                (value: Bool) in
+                customImageView.alpha = 0.0
+                customImageView.removeFromSuperview()
+        })
+    }
+    
+    func gameDidNotClear(customImageView: CustomImageView) {
+        
+    }
+    
+    func gameWillContinue(customImageView: CustomImageView, _ newFraction: Fraction) {
+        
+        let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
+        
+        newImageView.alpha = 0.0
+        newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+        
+        UIView.animateWithDuration(0.4, animations: {
+            customImageView.superview!.addSubview(newImageView)
+            newImageView.alpha = 1.0
+            newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            }, completion: {
+                (value: Bool) in
+                customImageView.alpha = 0.0
+                customImageView.removeFromSuperview()
+        })
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -58,9 +58,15 @@ class CustomButton: UIButton {
             self.addGestureRecognizer(swipeGestureRecognizer)
         }
         
+        let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
+        
         for animationButton in animationButtons {
             animationButton.setBackgroundImage(UIImage(named: imageNamePrefix + "\(animationButton.type.toInt())"), forState: UIControlState.Normal)
             animationButton.frame = CGRectMake(0, 0, self.frame.size.width / 1.2, self.frame.size.height / 1.2)
+            animationButton.center = centerPoint
+            self.addSubview(animationButton)
+            animationButton.alpha = 0.0
+            animationButton.transform = CGAffineTransformMakeScale(0.0, 0.0)
         }
     }
     
@@ -112,12 +118,17 @@ class CustomButton: UIButton {
             
             let point = CGPoint(x: radius * Int(cosf(Float(M_PI_2) * Float(animationButton.type.toInt()))), y: radius * Int(sinf(Float(M_PI_2) * Float(animationButton.type.toInt()))))
             
+            animationButton.alpha = 0.0
+            animationButton.transform = CGAffineTransformMakeScale(0, 0)
+            
             UIView.animateWithDuration(0.4,
                 delay: 0,
                 usingSpringWithDamping: 0.6,
                 initialSpringVelocity: 0,
                 options: UIViewAnimationOptions.CurveLinear,
                 animations: {
+                    animationButton.alpha = 1.0
+                    animationButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
                     animationButton.center = centerPoint.add(point);
                 }, completion: {
                     (value: Bool) in
@@ -134,9 +145,11 @@ class CustomButton: UIButton {
             
             UIView.animateWithDuration(0.2, animations: {
                     animationButton.center = centerPoint
+                    animationButton.alpha = 0.0
+                    animationButton.transform = CGAffineTransformMakeScale(0, 0)
                 }, completion: {
                     (value: Bool) in
-                    animationButton.removeFromSuperview()
+                    animationButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
             })
         }
     }
@@ -148,21 +161,23 @@ class CustomButton: UIButton {
         
         for animationButton in animationButtons {
             if animationButton.type == type {
-                UIView.animateWithDuration(0.4, animations: {
-                    animationButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
-                    animationButton.alpha = 0.4
+                UIView.animateWithDuration(0.3, animations: {
+                    animationButton.transform = CGAffineTransformMakeScale(1.4, 1.4)
+                    animationButton.alpha = 1.0
                     }, completion: {
                         (value: Bool) in
-                        animationButton.removeFromSuperview()
+                        animationButton.center = centerPoint
                         animationButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                        animationButton.alpha = 1.0
+                        animationButton.alpha = 0.0
                 })
             } else {
-                UIView.animateWithDuration(0.1, animations: {
+                UIView.animateWithDuration(0.2, animations: {
                     animationButton.center = centerPoint
+                    animationButton.alpha = 0.0
+                    animationButton.transform = CGAffineTransformMakeScale(0, 0)
                     }, completion: {
                         (value: Bool) in
-                        animationButton.removeFromSuperview()
+                        animationButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 })
             }
         }
