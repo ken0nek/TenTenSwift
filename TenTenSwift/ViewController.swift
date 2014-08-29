@@ -49,10 +49,8 @@ class ViewController: BaseViewController, GameLevelSelectButtonDelegate {
 
     func gameLevelSelectButtonDidSwipe(direction: Direction) {
         if direction != .Down {
-            if gameManager.gameLevel != direction.toGameLevel() {
-                gameManager.gameLevel = direction.toGameLevel()
-                showProblemWithRepeat(false)
-            }
+            gameManager.gameLevel = direction.toGameLevel()
+            showProblemWithRepeat(false)
         }
     }
 }
