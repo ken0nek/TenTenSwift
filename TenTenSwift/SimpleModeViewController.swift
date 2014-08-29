@@ -15,6 +15,7 @@ class SimpleModeViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
         setHomeButton()
+        self.title = "Simple"
         showProblemWithRepeat(false)
     }
 

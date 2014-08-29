@@ -47,6 +47,7 @@ class ResultViewController: BaseViewController {
         super.viewDidLoad()
         
         setHomeButton()
+        self.title = "Result"
         
         timeLabel.text = valuation != .D ? "Time : " + timeDescription() : ""
         answerLabel.text = "Answer : " + answerString

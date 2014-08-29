@@ -8,7 +8,7 @@
 
 import UIKit
 
-let ProblemsCount: UInt32 = 340
+let TotalProblemsCount: UInt32 = 340
 let EasyProblemsCount: UInt32 = 78
 let NormalProblemsCount: UInt32 = 84
 let HardProblemsCount: UInt32 = 178
@@ -18,7 +18,7 @@ enum GameLevel: Int {
 
     func random() -> Int {
         switch self {
-            case .Easy: return Int(EasyProblemsCount)
+            case .Easy: return Int(arc4random_uniform(EasyProblemsCount))
             case .Normal: return Int(EasyProblemsCount + arc4random_uniform(NormalProblemsCount))
             case .Hard: return Int(EasyProblemsCount + NormalProblemsCount + arc4random_uniform(HardProblemsCount))
         }

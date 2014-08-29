@@ -187,10 +187,6 @@ class BaseViewController: UIViewController, GameDelegate {
         self.navigationController.popToRootViewControllerAnimated(true)
     }
     
-    func setTitle(title: String) {
-        self.title = title
-    }
-    
     /*
     // MARK: - Navigation
 
