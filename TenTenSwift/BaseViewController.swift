@@ -38,7 +38,7 @@ class BaseViewController: UIViewController, GameDelegate {
     
     func showProblemWithRepeat(repeat: Bool) {
         if !repeat {
-            gameManager.problemIndex = Int(arc4random_uniform(gameManager.problemsCount()))
+            gameManager.problemIndex = gameManager.gameLevel.random()
         }
         
         refresh()
@@ -95,7 +95,7 @@ class BaseViewController: UIViewController, GameDelegate {
                 customImageView.removeFromSuperview()
         })
         
-        let rVC = ResultViewController.viewController(gameManager.getAnswerWithProblemID(0), time: 0, valuation: 0)
+        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: 0, valuation: 0)
         self.navigationController.pushViewController(rVC, animated: true)
     }
     

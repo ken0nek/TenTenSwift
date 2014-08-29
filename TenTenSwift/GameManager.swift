@@ -16,13 +16,20 @@ let HardProblemsCount: UInt32 = 178
 enum GameLevel: Int {
     case Easy, Normal, Hard
 
-    func count() -> UInt32 {
+    func random() -> Int {
         switch self {
-            case .Easy: return EasyProblemsCount
-case .Normal: return NormalProblemsCount
-case .Hard: return HardProblemsCount
-}
-}
+            case .Easy: return Int(EasyProblemsCount)
+            case .Normal: return Int(EasyProblemsCount + arc4random_uniform(NormalProblemsCount))
+            case .Hard: return Int(EasyProblemsCount + NormalProblemsCount + arc4random_uniform(HardProblemsCount))
+        }
+    }
+    func count() -> Int {
+        switch self {
+            case .Easy: return Int(EasyProblemsCount)
+            case .Normal: return Int(NormalProblemsCount)
+            case .Hard: return Int(HardProblemsCount)
+        }
+    }
 }
 
 extension Int {
@@ -40,13 +47,8 @@ extension Int {
 
 class GameManager: NSObject {
     var gameLevel: GameLevel = .Easy
-    var problemIndex: Int = 0 // TODO: 
+    var problemIndex: Int = 0 
     let problems: [[AnyObject]] = GameManager.loadProblems()
-    var problemsByLevel: [[AnyObject]] {
-        get{
-            return loadProblemsByLevel()
-        }
-    }
 
     class func sharedManager() -> GameManager {
         struct Singleton {
@@ -57,18 +59,6 @@ class GameManager: NSObject {
     
     override init() {
         
-    }
-
-    private func loadProblemsByLevel() -> [[AnyObject]] {
-        
-        var problemsByLevelArray: [[AnyObject]] = []
-        for aProblem in problems {
-            if makeProblemSet(aProblem).problemLevel == gameLevel.toRaw() {
-                problemsByLevelArray.append(aProblem)
-            }
-        }
-        
-        return problemsByLevelArray
     }
 
     private class func loadProblems() -> [[AnyObject]] {
@@ -88,23 +78,14 @@ class GameManager: NSObject {
     }
 
     func getNumbers() -> [Int] {
-        return makeProblemSet(problemsByLevel[problemIndex]).numbers
-    }
-
-    func getAnswerWithProblemID(problemID: Int) -> String {
-        return makeProblemSet(problems[problemID]).answer
+        return makeProblemSet(problems[problemIndex]).numbers
     }
     
     func getAnswer() -> String {
-        return makeProblemSet(problemsByLevel[problemIndex]).answer
-    }
-
-    func problemsCount() -> UInt32 {
-        return gameLevel.count()
+        return makeProblemSet(problems[problemIndex]).answer
     }
     
-    private func makeProblemSet(aLineArray: [AnyObject]) -> (problemID: Int, problemLevel: Int, numbers: [Int], answer: String) {
-        
+    private func makeProblemSet(aLineArray: [AnyObject]) -> (problemIndex: Int, problemLevel: Int, numbers: [Int], answer: String) {
         return ((aLineArray[0] as String).toInt()!, (aLineArray[1] as String).toInt()! , (aLineArray[2] as String).toInt()!.convertIntoArray(), aLineArray[3] as String)
     }
 }
