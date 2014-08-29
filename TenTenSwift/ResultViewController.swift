@@ -44,8 +44,8 @@ class ResultViewController: BaseViewController {
     }
     
     override func viewDidLoad() {
-        timeLabel.text = "\(time)"
-        answerLabel.text = answerString
+        timeLabel.text = valuation != .D ? "Time : " + timeDescription() : ""
+        answerLabel.text = "Answer : " + answerString
         messageLabel.text = messageFromValuation()
         resultImageView.image = UIImage(named: imageNameFromValuation())
     }
@@ -55,7 +55,7 @@ class ResultViewController: BaseViewController {
             case .A: return "Great !"
             case .B: return "Good !"
             case .C: return "Bad :("
-            case .D: return "You got D"
+            case .D: return ""
         }
     }
     
@@ -70,5 +70,11 @@ class ResultViewController: BaseViewController {
     
     private func imageNameFromValuation() -> String {
         return CommandIconPrefixString + "\(valuation.toInt())"
+    }
+    
+    private func timeDescription() -> String {
+        let minute = time / 60
+        let second = time % 60
+        return String(format:"%02i", minute) + " : " + String(format:"%02i", second)
     }
 }

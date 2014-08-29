@@ -95,7 +95,9 @@ class BaseViewController: UIViewController, GameDelegate {
                 customImageView.removeFromSuperview()
         })
         
-        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: 50)
+        let testTime = [5, 15, 60]
+        
+        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: testTime[Int(arc4random_uniform(3))])
         self.navigationController.pushViewController(rVC, animated: true)
     }
     
@@ -126,6 +128,9 @@ class BaseViewController: UIViewController, GameDelegate {
                 customImageView.alpha = 0.0
                 customImageView.removeFromSuperview()
         })
+        
+        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
+        self.navigationController.pushViewController(rVC, animated: true)
     }
     
     func gameDidNotClear(customImageView: CustomImageView) {
