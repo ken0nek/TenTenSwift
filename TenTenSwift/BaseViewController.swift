@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias BasicCompletion = (success:Bool?,obj:AnyObject?) -> Void
+
 let Origin = CGPointMake(55, 280)
 let Margin: CGFloat = 140
 let xMargin = CGPointMake(Margin, 0)
@@ -23,7 +25,9 @@ let positionArray: [CGPoint] = [FirstPoint, SecondPoint, ThirdPoint, FourthPoint
 class BaseViewController: UIViewController, GameDelegate {
     
     let gameManager: GameManager = GameManager.sharedManager()
-
+    private var time: Int = 0
+    private var gameTimer: NSTimer = NSTimer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,13 +40,28 @@ class BaseViewController: UIViewController, GameDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        gameTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        gameTimer.fire()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        time = 0
+        gameTimer.invalidate()
+    }
+    
+    func update() {
+        time++
+    }
+    
     func showProblemWithRepeat(repeat: Bool) {
         if !repeat {
             gameManager.problemIndex = gameManager.gameLevel.random()
         }
         
-        refresh()
-        display()
+        refresh { (success, obj) -> Void in
+            self.display()
+        }
     }
     
     private func display() {
@@ -65,12 +84,14 @@ class BaseViewController: UIViewController, GameDelegate {
         }
     }
     
-    private func refresh() {
+    private func refresh(completion: BasicCompletion) {
         for someView in self.view.subviews {
             if let customImageView = someView as? CustomImageView {
                 customImageView.removeFromSuperview()
             }
         }
+        
+        completion(success: true, obj: nil)
     }
     
     func getViewController(identifier: String) -> UIViewController {
@@ -95,9 +116,7 @@ class BaseViewController: UIViewController, GameDelegate {
                 customImageView.removeFromSuperview()
         })
         
-        let testTime = [5, 15, 60]
-        
-        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: testTime[Int(arc4random_uniform(3))])
+        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: time)
         self.navigationController.pushViewController(rVC, animated: true)
     }
     
