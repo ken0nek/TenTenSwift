@@ -40,7 +40,7 @@ extension Int {
 
 class GameManager: NSObject {
     var gameLevel: GameLevel = .Easy
-    var problemIndex: Int = 0
+    var problemIndex: Int = 0 // TODO: 
     let problems: [[AnyObject]] = GameManager.loadProblems()
     var problemsByLevel: [[AnyObject]] {
         get{
@@ -89,6 +89,10 @@ class GameManager: NSObject {
 
     func getNumbers() -> [Int] {
         return makeProblemSet(problemsByLevel[problemIndex]).numbers
+    }
+
+    func getAnswerWithProblemID(problemID: Int) -> String {
+        return makeProblemSet(problems[problemID]).answer
     }
     
     func getAnswer() -> String {

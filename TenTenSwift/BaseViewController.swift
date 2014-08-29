@@ -94,6 +94,9 @@ class BaseViewController: UIViewController, GameDelegate {
                 customImageView.alpha = 0.0
                 customImageView.removeFromSuperview()
         })
+        
+        let rVC = ResultViewController.viewController(gameManager.getAnswerWithProblemID(0), time: 0, valuation: 0)
+        self.navigationController.pushViewController(rVC, animated: true)
     }
     
     func gameDidClear(customImageView: CustomImageView) {
