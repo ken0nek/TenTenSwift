@@ -95,7 +95,7 @@ class BaseViewController: UIViewController, GameDelegate {
                 customImageView.removeFromSuperview()
         })
         
-        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: 0, valuation: 0)
+        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: 50)
         self.navigationController.pushViewController(rVC, animated: true)
     }
     
