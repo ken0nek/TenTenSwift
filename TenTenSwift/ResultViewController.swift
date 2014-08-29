@@ -44,6 +44,10 @@ class ResultViewController: BaseViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setHomeButton()
+        
         timeLabel.text = valuation != .D ? "Time : " + timeDescription() : ""
         answerLabel.text = "Answer : " + answerString
         messageLabel.text = messageFromValuation()

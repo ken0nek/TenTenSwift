@@ -174,6 +174,23 @@ class BaseViewController: UIViewController, GameDelegate {
         })
     }
     
+    func setHomeButton() {
+        let homeButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        homeButton.setBackgroundImage(UIImage(named: "numberBackground0"), forState: UIControlState.Normal)
+        homeButton.frame = CGRectMake(0, 0, 44, 44)
+        homeButton.addTarget(self, action: Selector("backToTop"), forControlEvents: UIControlEvents.TouchUpInside)
+        let leftBarButtonItem = UIBarButtonItem(customView: homeButton)
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
+    }
+    
+    func backToTop() {
+        self.navigationController.popToRootViewControllerAnimated(true)
+    }
+    
+    func setTitle(title: String) {
+        self.title = title
+    }
+    
     /*
     // MARK: - Navigation
 

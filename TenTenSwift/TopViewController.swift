@@ -14,7 +14,8 @@ class TopViewController: BaseViewController, GameLevelSelectButtonDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    
+        setTitle("Top")
+        
         let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: GameLevelSelectPrefixString, delegate: self)
         self.view.addSubview(gameLevelSelectButton)
     }

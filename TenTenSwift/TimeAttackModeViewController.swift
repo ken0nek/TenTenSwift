@@ -14,6 +14,7 @@ class TimeAttackModeViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setHomeButton()
     }
 
     override func didReceiveMemoryWarning() {
