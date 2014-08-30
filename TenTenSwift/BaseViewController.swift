@@ -197,7 +197,7 @@ class BaseViewController: UIViewController, GameDelegate {
         nextButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         nextButton.setTitle("NEXT PROBLEM", forState: UIControlState.Normal)
         nextButton.addTarget(self, action: Selector("didPressNextButton"), forControlEvents: UIControlEvents.TouchUpInside)
-        nextButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
+        // nextButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
         self.view.addSubview(nextButton)
     }
     
@@ -211,7 +211,7 @@ class BaseViewController: UIViewController, GameDelegate {
         replayButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         replayButton.setTitle("REPLAY", forState: UIControlState.Normal)
         replayButton.addTarget(self, action: Selector("didPressReplayButton"), forControlEvents: UIControlEvents.TouchUpInside)
-        replayButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
+        // replayButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
         self.view.addSubview(replayButton)
     }
     
@@ -225,7 +225,7 @@ class BaseViewController: UIViewController, GameDelegate {
         giveupButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         giveupButton.setTitle("GIVE UP", forState: UIControlState.Normal)
         giveupButton.addTarget(self, action: Selector("didPressGiveupButton"), forControlEvents: UIControlEvents.TouchUpInside)
-        giveupButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
+        // giveupButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
         self.view.addSubview(giveupButton)
     }
     
