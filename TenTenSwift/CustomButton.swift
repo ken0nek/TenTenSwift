@@ -9,7 +9,8 @@
 import UIKit
 
 let CommandIconPrefixString: String = "command_icon"
-let GameLevelSelectPrefixString: String = "gameLevelSelect"
+let SimpleModePrefixString: String = "SimpleMode"
+let TimeAttackPrefixString: String = "TimeAttack"
 
 enum Direction {
     case Right, Left, Up, Down
@@ -194,13 +195,18 @@ class CustomButton: UIButton {
 
 }
 
+//enum FlickButtonType {
+//    case Simple, TimeAttack
+//}
+
 protocol GameLevelSelectButtonDelegate: class {
-    func gameLevelSelectButtonDidSwipe(direction: Direction)
+    func gameLevelSelectButtonDidSwipe(button: GameLevelSelectButton, direction: Direction)
 }
 
 class GameLevelSelectButton: CustomButton {
     
     var delegate: GameLevelSelectButtonDelegate?
+    // var type: FlickButtonType?
     
     init(frame: CGRect, imageNamePrefix: String, delegate: GameLevelSelectButtonDelegate)  {
         self.delegate = delegate
@@ -226,7 +232,7 @@ class GameLevelSelectButton: CustomButton {
         default: println("undefined")
         }
         
-        delegate?.gameLevelSelectButtonDidSwipe(direction)
+        delegate?.gameLevelSelectButtonDidSwipe(self, direction: direction)
         execute(direction.toOperatorType())
     }
 }

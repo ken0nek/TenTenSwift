@@ -16,8 +16,13 @@ class TopViewController: BaseViewController, GameLevelSelectButtonDelegate {
         // Do any additional setup after loading the view.
         self.title = "Top"
         
-        let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: GameLevelSelectPrefixString, delegate: self)
-        self.view.addSubview(gameLevelSelectButton)
+        let simpleModeButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: SimpleModePrefixString, delegate: self)
+        simpleModeButton.tag = 100
+        self.view.addSubview(simpleModeButton)
+        
+        let timeAttackButton = GameLevelSelectButton(frame: CGRectMake(120, 280, 80, 80), imageNamePrefix: TimeAttackPrefixString, delegate: self)
+        timeAttackButton.tag  = 101
+        self.view.addSubview(timeAttackButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,14 +30,21 @@ class TopViewController: BaseViewController, GameLevelSelectButtonDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func gameLevelSelectButtonDidSwipe(direction: Direction) {
+    func gameLevelSelectButtonDidSwipe(button: GameLevelSelectButton, direction: Direction) {
         if direction != .Down {
             gameManager.gameLevel = direction.toGameLevel()
-            let smVC = getViewController("Simple") as SimpleModeViewController
-            self.navigationController.pushViewController(smVC, animated: false)
+            switch button.tag - 100 {
+            case 0:
+                let smVC = getViewController("Simple") as SimpleModeViewController
+                self.navigationController.pushViewController(smVC, animated: false)
+            case 1:
+                let tamVC = getViewController("TimeAttack") as TimeAttackModeViewController
+                self.navigationController.pushViewController(tamVC, animated: false)
+            default: println("hoge")
+            }
         }
     }
-
+    
     /*
     // MARK: - Navigation
 

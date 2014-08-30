@@ -24,7 +24,7 @@ class ViewController: BaseViewController, GameLevelSelectButtonDelegate {
 
         showProblemWithRepeat(true)
 
-        let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: GameLevelSelectPrefixString, delegate: self)
+        let gameLevelSelectButton = GameLevelSelectButton(frame: CGRectMake(120, 120, 80, 80), imageNamePrefix: SimpleModePrefixString, delegate: self)
         self.view.addSubview(gameLevelSelectButton)
     }
 
@@ -47,7 +47,7 @@ class ViewController: BaseViewController, GameLevelSelectButtonDelegate {
         answerLabel.text = gameManager.getAnswer()
     }
 
-    func gameLevelSelectButtonDidSwipe(direction: Direction) {
+    func gameLevelSelectButtonDidSwipe(button: GameLevelSelectButton, direction: Direction) {
         if direction != .Down {
             gameManager.gameLevel = direction.toGameLevel()
             showProblemWithRepeat(false)
