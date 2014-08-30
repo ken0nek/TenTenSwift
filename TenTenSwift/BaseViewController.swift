@@ -10,6 +10,8 @@ import UIKit
 
 typealias BasicCompletion = (success:Bool?,obj:AnyObject?) -> Void
 
+let DisplaySize = CGSizeMake(320, 568)
+
 let Origin = CGPointMake(55, 280)
 let Margin: CGFloat = 140
 let xMargin = CGPointMake(Margin, 0)
@@ -187,6 +189,27 @@ class BaseViewController: UIViewController, GameDelegate {
         self.navigationController.popToRootViewControllerAnimated(true)
     }
     
+    func setNextButton() {
+        let nextButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        nextButton.frame = CGRectMake(0, DisplaySize.height - 44, DisplaySize.width, 44)
+        nextButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        nextButton.setTitle("NEXT PROBLEM", forState: UIControlState.Normal)
+        nextButton.addTarget(self, action: Selector("didPressNextButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        nextButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
+        self.view.addSubview(nextButton)
+    }
+    
+    func didPressNextButton() {
+        self.navigationController.popViewControllerAnimated(true)
+    }
+    
+    func setReplayButton() {
+        
+    }
+    
+    func setGiveupButton() {
+        
+    }
     /*
     // MARK: - Navigation
 
