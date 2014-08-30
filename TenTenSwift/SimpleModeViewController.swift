@@ -15,8 +15,9 @@ class SimpleModeViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
         setHomeButton()
+        setReplayButton()
+        setGiveupButton()
         self.title = "Simple"
-        showProblemWithRepeat(false)
     }
 
     override func didReceiveMemoryWarning() {

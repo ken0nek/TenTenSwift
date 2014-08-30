@@ -43,11 +43,13 @@ class BaseViewController: UIViewController, GameDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         gameTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         gameTimer.fire()
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         time = 0
         gameTimer.invalidate()
     }
@@ -204,12 +206,34 @@ class BaseViewController: UIViewController, GameDelegate {
     }
     
     func setReplayButton() {
-        
+        let replayButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        replayButton.frame = CGRectMake(0, 64, DisplaySize.width / 2, 44)
+        replayButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        replayButton.setTitle("REPLAY", forState: UIControlState.Normal)
+        replayButton.addTarget(self, action: Selector("didPressReplayButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        replayButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
+        self.view.addSubview(replayButton)
+    }
+    
+    func didPressReplayButton() {
+        showProblemWithRepeat(true)
     }
     
     func setGiveupButton() {
-        
+        let giveupButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        giveupButton.frame = CGRectMake(DisplaySize.width / 2, 64, DisplaySize.width / 2, 44)
+        giveupButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        giveupButton.setTitle("GIVE UP", forState: UIControlState.Normal)
+        giveupButton.addTarget(self, action: Selector("didPressGiveupButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        giveupButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
+        self.view.addSubview(giveupButton)
     }
+    
+    func didPressGiveupButton() {
+        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
+        self.navigationController.pushViewController(rVC, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
