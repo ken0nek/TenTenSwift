@@ -10,11 +10,11 @@ import UIKit
 
 class SimpleModeViewController: BaseViewController {
 
+    @IBOutlet weak var timeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setHomeButton()
         setReplayButton()
         setGiveupButton()
         self.title = "Simple"
@@ -30,6 +30,12 @@ class SimpleModeViewController: BaseViewController {
         
         showProblemWithRepeat(false)
     }
+    
+    override func update() {
+        super.update()
+        timeLabel.text = timeDescription()
+    }
+    
     /*
     // MARK: - Navigation
 

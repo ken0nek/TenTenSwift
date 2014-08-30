@@ -8,19 +8,48 @@
 
 import UIKit
 
+let MaxIndex: Int = 5
+
 class TimeAttackModeViewController: BaseViewController {
 
+    private var currentIndex: Int = 1
+    
+    @IBOutlet weak var indexLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setHomeButton()
-        self.title = "TimeAttack"
+        setReplayButton()
+        setGiveupButton()
+        self.title = "Time Attack"
+        
+        indexLabel.text = "\(currentIndex) / \(MaxIndex)"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        showProblemWithRepeat(false)
+    }
+    
+    override func gameWillClear(customImageView: CustomImageView) {
+        super.gameWillClear(customImageView)
+        
+        currentIndex++
+        indexLabel.text = "\(currentIndex) / \(MaxIndex)"
+        
+        
+    }
+    
+    override func update() {
+        super.update()
+        timeLabel.text = timeDescription()
     }
     
 

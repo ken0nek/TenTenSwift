@@ -34,10 +34,12 @@ class TopViewController: BaseViewController, GameLevelSelectButtonDelegate {
         if direction != .Down {
             gameManager.gameLevel = direction.toGameLevel()
             switch button.tag - 100 {
-            case 0:
+            case 0: // Simple
+                gameManager.gameType = .Simple
                 let smVC = getViewController("Simple") as SimpleModeViewController
                 self.navigationController.pushViewController(smVC, animated: false)
-            case 1:
+            case 1: // Time Attack
+                gameManager.gameType = .TimeAttack
                 let tamVC = getViewController("TimeAttack") as TimeAttackModeViewController
                 self.navigationController.pushViewController(tamVC, animated: false)
             default: println("hoge")

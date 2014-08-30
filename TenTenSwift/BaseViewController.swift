@@ -27,7 +27,7 @@ let positionArray: [CGPoint] = [FirstPoint, SecondPoint, ThirdPoint, FourthPoint
 class BaseViewController: UIViewController, GameDelegate {
     
     let gameManager: GameManager = GameManager.sharedManager()
-    private var time: Int = 0
+    private var privateTime: Int = 0
     private var gameTimer: NSTimer = NSTimer()
     
     override func viewDidLoad() {
@@ -44,18 +44,20 @@ class BaseViewController: UIViewController, GameDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         gameTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         gameTimer.fire()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        time = 0
+        privateTime = 0
         gameTimer.invalidate()
     }
     
     func update() {
-        time++
+        privateTime++
+        println("privateTime : \(privateTime)")
     }
     
     func showProblemWithRepeat(repeat: Bool) {
@@ -105,23 +107,28 @@ class BaseViewController: UIViewController, GameDelegate {
     }
     
     func gameWillClear(customImageView: CustomImageView) {
-        let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: Fraction(numerator: 10), imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
-        
-        newImageView.alpha = 0.0
-        newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
-        
-        UIView.animateWithDuration(0.4, animations: {
-            customImageView.superview!.addSubview(newImageView)
-            newImageView.alpha = 1.0
-            newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            }, completion: {
-                (value: Bool) in
-                customImageView.alpha = 0.0
-                customImageView.removeFromSuperview()
-        })
-        
-        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: time)
-        self.navigationController.pushViewController(rVC, animated: true)
+        switch gameManager.gameType {
+        case .Simple:
+            let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: Fraction(numerator: 10), imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
+            
+            newImageView.alpha = 0.0
+            newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+            
+            UIView.animateWithDuration(0.4, animations: {
+                customImageView.superview!.addSubview(newImageView)
+                newImageView.alpha = 1.0
+                newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                }, completion: {
+                    (value: Bool) in
+                    customImageView.alpha = 0.0
+                    customImageView.removeFromSuperview()
+            })
+            
+            let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: privateTime)
+            self.navigationController.pushViewController(rVC, animated: true)
+        case .TimeAttack:
+            showProblemWithRepeat(false)
+        }
     }
     
     func gameDidClear(customImageView: CustomImageView) {
@@ -137,23 +144,30 @@ class BaseViewController: UIViewController, GameDelegate {
     }
     
     func gameWillNotClear(customImageView: CustomImageView, _ newFraction: Fraction) {
-        let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
-        
-        newImageView.alpha = 0.0
-        newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
-        
-        UIView.animateWithDuration(0.4, animations: {
-            customImageView.superview!.addSubview(newImageView)
-            newImageView.alpha = 1.0
-            newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            }, completion: {
-                (value: Bool) in
-                customImageView.alpha = 0.0
-                customImageView.removeFromSuperview()
-        })
-        
-        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
-        self.navigationController.pushViewController(rVC, animated: true)
+        switch gameManager.gameType {
+        case .Simple:
+            let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
+            
+            newImageView.alpha = 0.0
+            newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+            
+            UIView.animateWithDuration(0.4, animations: {
+                customImageView.superview!.addSubview(newImageView)
+                newImageView.alpha = 1.0
+                newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                }, completion: {
+                    (value: Bool) in
+                    customImageView.alpha = 0.0
+                    customImageView.removeFromSuperview()
+            })
+            
+            let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
+            self.navigationController.pushViewController(rVC, animated: true)
+        case .TimeAttack:
+            
+            println("Highlight Replay Button")
+        }
+
     }
     
     func gameDidNotClear(customImageView: CustomImageView) {
@@ -232,6 +246,12 @@ class BaseViewController: UIViewController, GameDelegate {
     func didPressGiveupButton() {
         let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
         self.navigationController.pushViewController(rVC, animated: true)
+    }
+    
+    func timeDescription() -> String {
+        let minute = privateTime / 60
+        let second = privateTime % 60
+        return String(format:"%02i", minute) + " : " + String(format:"%02i", second)
     }
     
     /*

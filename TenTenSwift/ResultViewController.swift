@@ -33,7 +33,7 @@ class ResultViewController: BaseViewController {
         }
     }
     var answerString: String = ""
-    var time: Int = -1
+    private var time: Int = -1
     
     class func viewController(answerString: String, time: Int) -> ResultViewController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil);
@@ -79,7 +79,7 @@ class ResultViewController: BaseViewController {
         return CommandIconPrefixString + "\(valuation.toInt())"
     }
     
-    private func timeDescription() -> String {
+    override func timeDescription() -> String {
         let minute = time / 60
         let second = time % 60
         return String(format:"%02i", minute) + " : " + String(format:"%02i", second)

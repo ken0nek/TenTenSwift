@@ -195,10 +195,6 @@ class CustomButton: UIButton {
 
 }
 
-//enum FlickButtonType {
-//    case Simple, TimeAttack
-//}
-
 protocol GameLevelSelectButtonDelegate: class {
     func gameLevelSelectButtonDidSwipe(button: GameLevelSelectButton, direction: Direction)
 }

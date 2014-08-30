@@ -45,10 +45,16 @@ extension Int {
     }
 }
 
+enum GameType {
+    case Simple, TimeAttack
+}
+
 class GameManager: NSObject {
     var gameLevel: GameLevel = .Easy
     var problemIndex: Int = 0 
     let problems: [[AnyObject]] = GameManager.loadProblems()
+    var gameType: GameType = .Simple
+
 
     class func sharedManager() -> GameManager {
         struct Singleton {
