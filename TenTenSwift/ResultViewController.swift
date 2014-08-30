@@ -47,7 +47,11 @@ class ResultViewController: BaseViewController {
         super.viewDidLoad()
         
         setHomeButton()
-        setNextButton()
+        
+        switch gameManager.gameType {
+        case .Simple:  setNextButton()
+        case .TimeAttack: setRetryButton()
+        }
         
         self.title = "Result"
         

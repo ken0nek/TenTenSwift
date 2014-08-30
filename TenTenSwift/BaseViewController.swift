@@ -219,6 +219,20 @@ class BaseViewController: UIViewController, GameDelegate {
         self.navigationController.popViewControllerAnimated(true)
     }
     
+    func setRetryButton() {
+        let retryButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        retryButton.frame = CGRectMake(0, DisplaySize.height - 44, DisplaySize.width, 44)
+        retryButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        retryButton.setTitle("RETRY", forState: UIControlState.Normal)
+        retryButton.addTarget(self, action: Selector("didPressRetryButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        // nextButton.setBackgroundImage(UIImage(named: ""), forState: UIControlState.Normal)
+        self.view.addSubview(retryButton)
+    }
+    
+    func didPressRetryButton() {
+        self.navigationController.popViewControllerAnimated(true)
+    }
+    
     func setReplayButton() {
         let replayButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         replayButton.frame = CGRectMake(0, 64, DisplaySize.width / 2, 44)
@@ -252,6 +266,11 @@ class BaseViewController: UIViewController, GameDelegate {
         let minute = privateTime / 60
         let second = privateTime % 60
         return String(format:"%02i", minute) + " : " + String(format:"%02i", second)
+    }
+    
+    func finishTimeAttack() {
+        let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: privateTime)
+        self.navigationController.pushViewController(rVC, animated: true)
     }
     
     /*

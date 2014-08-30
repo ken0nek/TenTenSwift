@@ -41,10 +41,12 @@ class TimeAttackModeViewController: BaseViewController {
     override func gameWillClear(customImageView: CustomImageView) {
         super.gameWillClear(customImageView)
         
-        currentIndex++
-        indexLabel.text = "\(currentIndex) / \(MaxIndex)"
-        
-        
+        if currentIndex == 5 {
+            finishTimeAttack()
+        } else {
+            currentIndex++
+            indexLabel.text = "\(currentIndex) / \(MaxIndex)"
+        }
     }
     
     override func update() {
