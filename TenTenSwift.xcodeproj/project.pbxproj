@@ -26,6 +26,8 @@
 		4A557D5C19B1ACA0008E0C1F /* TimeAttack2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D5819B1ACA0008E0C1F /* TimeAttack2@2x.png */; };
 		4A557D5D19B1ACA0008E0C1F /* TimeAttack3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D5919B1ACA0008E0C1F /* TimeAttack3@2x.png */; };
 		4A557D5F19B2E66D008E0C1F /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A557D5E19B2E66D008E0C1F /* MultipeerConnectivity.framework */; };
+		4A557D6319B31165008E0C1F /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D6219B31165008E0C1F /* icon@2x.png */; };
+		4A557D6519B332D9008E0C1F /* NumberImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A557D6419B332D9008E0C1F /* NumberImageView.swift */; };
 		4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */; };
 		4A61D1C319AA26C40091618D /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61D1C219AA26C40091618D /* Fraction.swift */; };
 		4A61D1C519AAC4F50091618D /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61D1C419AAC4F50091618D /* CustomImageView.swift */; };
@@ -86,6 +88,8 @@
 		4A557D5819B1ACA0008E0C1F /* TimeAttack2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimeAttack2@2x.png"; sourceTree = "<group>"; };
 		4A557D5919B1ACA0008E0C1F /* TimeAttack3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimeAttack3@2x.png"; sourceTree = "<group>"; };
 		4A557D5E19B2E66D008E0C1F /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		4A557D6219B31165008E0C1F /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		4A557D6419B332D9008E0C1F /* NumberImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberImageView.swift; sourceTree = "<group>"; };
 		4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		4A61D1C219AA26C40091618D /* Fraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
 		4A61D1C419AAC4F50091618D /* CustomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				4A6320E319B00A4900683B98 /* ResultViewController.swift */,
 				4A61D1C419AAC4F50091618D /* CustomImageView.swift */,
 				4A61D1C619AACEF60091618D /* CustomLabel.swift */,
+				4A557D6419B332D9008E0C1F /* NumberImageView.swift */,
 				4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */,
 				4AD2845E19A4C556008391DA /* AnimationButton.swift */,
 				4A557D5219B061F1008E0C1F /* PlanetImageView.swift */,
@@ -173,6 +178,7 @@
 				4A22D726195155F500A117EB /* ViewController.swift */,
 				4A22D728195155F500A117EB /* Main.storyboard */,
 				4A6DE47C19AC6DA6007BFDDD /* combination.csv */,
+				4A557D6219B31165008E0C1F /* icon@2x.png */,
 				4A39850919ADEEE20050A162 /* SimpleMode@2x.png */,
 				4AB4F11A19ACE4F200724C12 /* SimpleMode0@2x.png */,
 				4AB4F11B19ACE4F200724C12 /* SimpleMode1@2x.png */,
@@ -330,6 +336,7 @@
 				4A557D5A19B1ACA0008E0C1F /* TimeAttack0@2x.png in Resources */,
 				4A39850A19ADEEE20050A162 /* SimpleMode@2x.png in Resources */,
 				4A22D72C195155F500A117EB /* Images.xcassets in Resources */,
+				4A557D6319B31165008E0C1F /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +367,7 @@
 				4A22D725195155F500A117EB /* AppDelegate.swift in Sources */,
 				4A39850C19ADF12E0050A162 /* SimpleModeViewController.swift in Sources */,
 				4A39850E19ADF1420050A162 /* TimeAttackModeViewController.swift in Sources */,
+				4A557D6519B332D9008E0C1F /* NumberImageView.swift in Sources */,
 				4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */,
 				4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */,
 				4A61D1C319AA26C40091618D /* Fraction.swift in Sources */,
@@ -430,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -466,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

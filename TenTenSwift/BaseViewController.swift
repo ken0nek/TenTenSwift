@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 typealias BasicCompletion = (success:Bool?,obj:AnyObject?) -> Void
 
@@ -24,17 +25,38 @@ let FourthPoint = CGPointMake(Origin.add(xMargin).x, Origin.add(yMargin).y)
 
 let positionArray: [CGPoint] = [FirstPoint, SecondPoint, ThirdPoint, FourthPoint];
 
-class BaseViewController: UIViewController, GameDelegate {
+class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     
     let gameManager: GameManager = GameManager.sharedManager()
     private var privateTime: Int = 0
     private var gameTimer: NSTimer = NSTimer()
+    
+    var myPeerID: MCPeerID?
+    var serviceType: String?
+    var nearbyServiceAdvertiser: MCNearbyServiceAdvertiser?
+    var nearbyServiceBrowser: MCNearbyServiceBrowser?
+    var aSession: MCSession?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        let uuid = NSUUID.UUID()
+        myPeerID = MCPeerID(displayName: uuid.UUIDString)
+        let myPeerIDName = myPeerID?.displayName
+        println("peerID.displayName : \(myPeerIDName)")
+        
+        serviceType = "p2ptest"
+        
+        nearbyServiceBrowser = MCNearbyServiceBrowser(peer: myPeerID, serviceType: serviceType)
+        nearbyServiceBrowser?.delegate = self
+        
+        aSession = MCSession(peer: myPeerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.None)
+        aSession?.delegate = self
+        
+        startBrowsing()
     }
 
     override func didReceiveMemoryWarning() {
@@ -271,6 +293,104 @@ class BaseViewController: UIViewController, GameDelegate {
     func finishTimeAttack() {
         let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: privateTime)
         self.navigationController.pushViewController(rVC, animated: true)
+    }
+    
+    // MARK: - Connectivity
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: "OK")
+        alert.show()
+    }
+    
+    // MARK: - browser delegate
+    
+    func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
+        println("error.localizedDescription : \(error.localizedDescription)")
+    }
+    
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+        println("found peer : \(peerID.displayName)")
+        showAlert("found peer", message: peerID.displayName)
+        
+        println("info.description : \(info.description)")
+        
+        nearbyServiceBrowser?.invitePeer(peerID, toSession: aSession, withContext: ("Welcome" as String).dataUsingEncoding(NSUTF8StringEncoding), timeout: 10)
+    }
+    
+    func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
+        
+    }
+    
+    // MARK: - advertiser delegate
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
+        println("error.localizedDescription : \(error.localizedDescription)")
+        showAlert("ERROR didNotStartAdvertisingPeer", message: error.localizedDescription)
+    }
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+        invitationHandler(true, aSession)
+        showAlert("didReceiveInvitationFromPeer", message: "accept invitation!")
+    }
+    
+    // MARK: - session delegate
+    
+    // receiving data
+    func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
+        let receivedData = NSString(data: data, encoding: NSUTF8StringEncoding)
+        showAlert("didReceiveData", message: receivedData)
+    }
+    
+    func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
+        println("didStartReceiving")
+    }
+    
+    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
+        println("didFinishReceiving")
+    }
+    
+    func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
+        
+    }
+    
+    // sending Data
+    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
+        println("peerID : \(peerID)")
+        println("state : \(state)")
+        
+        if state == MCSessionState.Connected {
+            println("session sends data")
+            let message: NSString = "problemIndex : \(7)"
+            let sendingData = message.dataUsingEncoding(NSUTF8StringEncoding)
+            session.sendData(sendingData, toPeers: NSArray(object: peerID), withMode: MCSessionSendDataMode.Reliable, error: nil)
+        }
+    }
+    
+    func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
+        certificateHandler(true)
+    }
+    
+    // MARK: - advertising
+    
+    func startAdvertising() {
+        let discoveryInfo = ["takase" : "yumiko", "tominaga" : "ken"]
+        nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: discoveryInfo, serviceType: serviceType)
+        nearbyServiceAdvertiser?.delegate = self
+        nearbyServiceAdvertiser?.startAdvertisingPeer()
+    }
+    
+    func stopAdvertising() {
+        nearbyServiceAdvertiser?.stopAdvertisingPeer()
+    }
+    
+    // MARK: - browsing
+    
+    func startBrowsing() {
+        nearbyServiceBrowser?.startBrowsingForPeers()
+    }
+    
+    func stopBrowsing() {
+        nearbyServiceBrowser?.stopBrowsingForPeers()
     }
     
     /*

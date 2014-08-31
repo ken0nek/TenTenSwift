@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import MultipeerConnectivity
+
+let isIPhone: Bool = UIDevice.currentDevice().userInterfaceIdiom == .Phone ? true : false
 
 class TopViewController: BaseViewController, GameLevelSelectButtonDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
