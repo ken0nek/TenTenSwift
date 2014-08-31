@@ -38,6 +38,12 @@ class TimeAttackModeViewController: BaseViewController {
         showProblemWithRepeat(false)
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        currentIndex = 1
+    }
+    
     override func gameWillClear(customImageView: CustomImageView) {
         super.gameWillClear(customImageView)
         
