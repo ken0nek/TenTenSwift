@@ -23,8 +23,6 @@ class TimeAttackModeViewController: BaseViewController {
         setReplayButton()
         setGiveupButton()
         self.title = "Time Attack"
-        
-        indexLabel.text = "\(currentIndex) / \(MaxIndex)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,12 +40,13 @@ class TimeAttackModeViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         currentIndex = 1
+        indexLabel.text = "\(currentIndex) / \(MaxIndex)"
     }
     
     override func gameWillClear(customImageView: CustomImageView) {
         super.gameWillClear(customImageView)
         
-        if currentIndex == 5 {
+        if currentIndex == MaxIndex {
             finishTimeAttack()
         } else {
             currentIndex++

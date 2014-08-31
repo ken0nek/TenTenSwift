@@ -56,8 +56,14 @@ class ResultViewController: BaseViewController {
         self.title = "Result"
         
         timeLabel.text = valuation != .D ? "Time : " + timeDescription() : ""
-        answerLabel.text = "Answer : " + answerString
+        
+        switch gameManager.gameType {
+        case .Simple:  answerLabel.text = "Answer : " + answerString
+        case .TimeAttack: answerLabel.text = ""
+        }
+        
         messageLabel.text = messageFromValuation()
+        
         resultImageView.image = UIImage(named: imageNameFromValuation())
     }
     
