@@ -25,7 +25,6 @@
 		4A557D5D19B1ACA0008E0C1F /* TimeAttack3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D5919B1ACA0008E0C1F /* TimeAttack3@2x.png */; };
 		4A557D5F19B2E66D008E0C1F /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A557D5E19B2E66D008E0C1F /* MultipeerConnectivity.framework */; };
 		4A557D6319B31165008E0C1F /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D6219B31165008E0C1F /* icon@2x.png */; };
-		4A557D6519B332D9008E0C1F /* NumberImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A557D6419B332D9008E0C1F /* NumberImageView.swift */; };
 		4A557D6819B33656008E0C1F /* numberBackground0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D6619B33656008E0C1F /* numberBackground0@2x.png */; };
 		4A557D6919B33656008E0C1F /* numberBackground1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D6719B33656008E0C1F /* numberBackground1@2x.png */; };
 		4A557D7419B33809008E0C1F /* number0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D6A19B33809008E0C1F /* number0@2x.png */; };
@@ -38,6 +37,7 @@
 		4A557D7B19B33809008E0C1F /* number7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D7119B33809008E0C1F /* number7@2x.png */; };
 		4A557D7C19B33809008E0C1F /* number8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D7219B33809008E0C1F /* number8@2x.png */; };
 		4A557D7D19B33809008E0C1F /* number9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A557D7319B33809008E0C1F /* number9@2x.png */; };
+		4A557D7F19B33989008E0C1F /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A557D7E19B33989008E0C1F /* NumberView.swift */; };
 		4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */; };
 		4A61D1C319AA26C40091618D /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61D1C219AA26C40091618D /* Fraction.swift */; };
 		4A61D1C519AAC4F50091618D /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A61D1C419AAC4F50091618D /* CustomImageView.swift */; };
@@ -97,7 +97,6 @@
 		4A557D5919B1ACA0008E0C1F /* TimeAttack3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimeAttack3@2x.png"; sourceTree = "<group>"; };
 		4A557D5E19B2E66D008E0C1F /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		4A557D6219B31165008E0C1F /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		4A557D6419B332D9008E0C1F /* NumberImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberImageView.swift; sourceTree = "<group>"; };
 		4A557D6619B33656008E0C1F /* numberBackground0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "numberBackground0@2x.png"; sourceTree = "<group>"; };
 		4A557D6719B33656008E0C1F /* numberBackground1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "numberBackground1@2x.png"; sourceTree = "<group>"; };
 		4A557D6A19B33809008E0C1F /* number0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number0@2x.png"; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		4A557D7119B33809008E0C1F /* number7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number7@2x.png"; sourceTree = "<group>"; };
 		4A557D7219B33809008E0C1F /* number8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number8@2x.png"; sourceTree = "<group>"; };
 		4A557D7319B33809008E0C1F /* number9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "number9@2x.png"; sourceTree = "<group>"; };
+		4A557D7E19B33989008E0C1F /* NumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
 		4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		4A61D1C219AA26C40091618D /* Fraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
 		4A61D1C419AAC4F50091618D /* CustomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
@@ -188,13 +188,13 @@
 				4A39850D19ADF1420050A162 /* TimeAttackModeViewController.swift */,
 				4A6320E319B00A4900683B98 /* ResultViewController.swift */,
 				4A61D1C419AAC4F50091618D /* CustomImageView.swift */,
-				4A61D1C619AACEF60091618D /* CustomLabel.swift */,
-				4A557D6419B332D9008E0C1F /* NumberImageView.swift */,
+				4A557D7E19B33989008E0C1F /* NumberView.swift */,
 				4A5ECB2319A3517F00EC6C4A /* CustomButton.swift */,
 				4AD2845E19A4C556008391DA /* AnimationButton.swift */,
 				4A557D5219B061F1008E0C1F /* PlanetImageView.swift */,
 				4A61D1C219AA26C40091618D /* Fraction.swift */,
 				4A23037319A4F61900832171 /* CustomView.swift */,
+				4A61D1C619AACEF60091618D /* CustomLabel.swift */,
 				4A22D726195155F500A117EB /* ViewController.swift */,
 				4A22D728195155F500A117EB /* Main.storyboard */,
 				4A6DE47C19AC6DA6007BFDDD /* combination.csv */,
@@ -405,9 +405,9 @@
 				4A22D727195155F500A117EB /* ViewController.swift in Sources */,
 				4A23037419A4F61900832171 /* CustomView.swift in Sources */,
 				4A22D725195155F500A117EB /* AppDelegate.swift in Sources */,
+				4A557D7F19B33989008E0C1F /* NumberView.swift in Sources */,
 				4A39850C19ADF12E0050A162 /* SimpleModeViewController.swift in Sources */,
 				4A39850E19ADF1420050A162 /* TimeAttackModeViewController.swift in Sources */,
-				4A557D6519B332D9008E0C1F /* NumberImageView.swift in Sources */,
 				4AC611F4198F541B003FDBC5 /* BaseViewController.swift in Sources */,
 				4A5ECB2419A3517F00EC6C4A /* CustomButton.swift in Sources */,
 				4A61D1C319AA26C40091618D /* Fraction.swift in Sources */,

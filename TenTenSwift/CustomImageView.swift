@@ -19,7 +19,6 @@ protocol GameDelegate: class {
     func gameWillContinue(customImageView: CustomImageView, _ newFraction: Fraction)
 }
 
-let NumberImagePrefix: String = "number"
 let NumberBackgroundImagePrefix: String = "numberBackground"
 
 class CustomImageView: UIImageView {
@@ -49,36 +48,18 @@ class CustomImageView: UIImageView {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("didDrag:"))
         self.addGestureRecognizer(panGestureRecognizer)
         
+        let width = self.frame.size.width
+        let height = number.isFraction ? self.frame.size.height / 2 : self.frame.size.height
+        
         if number.isFraction {
-            let width = self.frame.size.width
-            let height = self.frame.size.height / 2
+            let numeratorView = NumberView(frame: CGRectMake(0, 0, width, height), number: self.number.numerator)
+            self.addSubview(numeratorView)
             
-//            let numeratorLabel = CustomLabel(frame: CGRectMake((self.frame.size.width - width) / 2, 0, width, height))
-//            let denominatorLabel = CustomLabel(frame: CGRectMake(numeratorLabel.frame.origin.x, numeratorLabel.frame.size.height, width, height))
-//            
-//            numeratorLabel.text = "\(number.numerator)"
-//            denominatorLabel.text = "\(number.denominator)"
-//            
-//            self.addSubview(numeratorLabel)
-//            self.addSubview(denominatorLabel)
-            let numeratorImageView = NumberImageView(frame: CGRectMake((self.frame.size.width - width) / 2, 0, width, height))
-            numeratorImageView.image = UIImage(named: NumberImagePrefix + "\(number.numerator)")
-            self.addSubview(numeratorImageView)
-            
-            let denominatorImageView = NumberImageView(frame: CGRectMake(numeratorImageView.frame.origin.x, numeratorImageView.frame.size.height, width, height))
-            denominatorImageView.image = UIImage(named: NumberImagePrefix + "\(number.denominator)")
-            self.addSubview(denominatorImageView)
+            let denominatorView = NumberView(frame: CGRectMake(numeratorView.frame.origin.x, numeratorView.frame.size.height, width, height), number: self.number.denominator)
+            self.addSubview(denominatorView)
         } else {
-            let width = self.frame.size.width
-            let height = self.frame.size.height
-            
-//            let numeratorLabel = CustomLabel(frame: CGRectMake((self.frame.size.width - width) / 2, 0, width, height))
-//            numeratorLabel.text = "\(number.numerator)"
-//            self.addSubview(numeratorLabel)
-            
-            let numeratorImageView = NumberImageView(frame: CGRectMake((self.frame.size.width - width) / 2, 0, width, height))
-            numeratorImageView.image = UIImage(named: NumberImagePrefix + "\(number.intValue())")
-            self.addSubview(numeratorImageView)
+            let numeratorView = NumberView(frame: CGRectMake(0, 0, width, height), number: self.number.numerator)
+            self.addSubview(numeratorView)
         }
         
         let centerPoint = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)

@@ -166,30 +166,29 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
     }
     
     func gameWillNotClear(customImageView: CustomImageView, _ newFraction: Fraction) {
-        switch gameManager.gameType {
-        case .Simple:
-            let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
-            
-            newImageView.alpha = 0.0
-            newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
-            
-            UIView.animateWithDuration(0.4, animations: {
-                customImageView.superview!.addSubview(newImageView)
-                newImageView.alpha = 1.0
-                newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                }, completion: {
-                    (value: Bool) in
-                    customImageView.alpha = 0.0
-                    customImageView.removeFromSuperview()
-            })
-            
-            let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
-            self.navigationController.pushViewController(rVC, animated: true)
-        case .TimeAttack:
-            
-            println("Highlight Replay Button")
-        }
-
+        
+        let newImageView = CustomImageView(frame: CGRectMake(customImageView.frame.origin.x, customImageView.frame.origin.y, customImageView.frame.size.width, customImageView.frame.size.height), number: newFraction, imageNamePrefix: customImageView.imageNamePrefix, delegate: self)
+        
+        newImageView.alpha = 0.0
+        newImageView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+        
+        UIView.animateWithDuration(0.4, animations: {
+            customImageView.superview!.addSubview(newImageView)
+            newImageView.alpha = 1.0
+            newImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            }, completion: {
+                (value: Bool) in
+                customImageView.alpha = 0.0
+                customImageView.removeFromSuperview()
+        })
+        
+//        switch gameManager.gameType {
+//        case .Simple:
+//            let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
+//            self.navigationController.pushViewController(rVC, animated: true)
+//        case .TimeAttack:
+//            println("Highlight Replay Button")
+//        }
     }
     
     func gameDidNotClear(customImageView: CustomImageView) {
