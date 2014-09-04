@@ -147,7 +147,7 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
             })
             
             let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: privateTime)
-            self.navigationController.pushViewController(rVC, animated: true)
+            self.navigationController?.pushViewController(rVC, animated: true)
         case .TimeAttack:
             showProblemWithRepeat(false)
         }
@@ -181,14 +181,6 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
                 customImageView.alpha = 0.0
                 customImageView.removeFromSuperview()
         })
-        
-//        switch gameManager.gameType {
-//        case .Simple:
-//            let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
-//            self.navigationController.pushViewController(rVC, animated: true)
-//        case .TimeAttack:
-//            println("Highlight Replay Button")
-//        }
     }
     
     func gameDidNotClear(customImageView: CustomImageView) {
@@ -223,7 +215,7 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
     }
     
     func backToTop() {
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func setNextButton() {
@@ -237,7 +229,7 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
     }
     
     func didPressNextButton() {
-        self.navigationController.popViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func setRetryButton() {
@@ -251,7 +243,7 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
     }
     
     func didPressRetryButton() {
-        self.navigationController.popViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func setReplayButton() {
@@ -280,7 +272,7 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
     
     func didPressGiveupButton() {
         let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: -1)
-        self.navigationController.pushViewController(rVC, animated: true)
+        self.navigationController?.pushViewController(rVC, animated: true)
     }
     
     func timeDescription() -> String {
@@ -291,7 +283,7 @@ class BaseViewController: UIViewController, GameDelegate, MCNearbyServiceAdverti
     
     func finishTimeAttack() {
         let rVC = ResultViewController.viewController(gameManager.getAnswer(), time: privateTime)
-        self.navigationController.pushViewController(rVC, animated: true)
+        self.navigationController?.pushViewController(rVC, animated: true)
     }
     
     // MARK: - Connectivity
